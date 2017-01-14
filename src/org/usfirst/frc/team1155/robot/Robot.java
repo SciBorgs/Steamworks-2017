@@ -3,6 +3,7 @@ package org.usfirst.frc.team1155.robot;
 
 import org.usfirst.frc.team1155.robot.subsystems.ClimbSubsystem;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team1155.robot.subsystems.GearSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,6 +21,7 @@ public class Robot extends IterativeRobot {
 
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static final ClimbSubsystem climb = new ClimbSubsystem();
+	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static OI oi;
 
     Command autonomousCommand;
