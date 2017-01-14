@@ -18,8 +18,8 @@ public class ClimbSubsystem extends Subsystem {
 		spinningTubeTalon = new CANTalon(PortMap.SPIN_TUBE_TALON);
 	}
 	
-	public void fSpin(double speed){
-		spinningTubeTalon.set(speed);
+	public void climbUp(){
+		spinningTubeTalon.set(1);
 	}
 	
 	public void halt(){
