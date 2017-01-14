@@ -13,12 +13,11 @@ public class ClimbCommand extends Command {
 	
 	public static Joystick cButton;
 	
-	private ClimbSubsystem climb = Robot.oCLimb;	
+	private ClimbSubsystem climb = Robot.climb;	
 	
-	//public ExampleCommand() {
-		// Use requires() here to declare subsystem dependencies
-	//	requires(Robot.exampleSubsystem);
-	//}
+	public ClimbCommand() {
+		requires(Robot.climb);
+	}
 
 	// Called just before this Command runs the first time
 	@Override
