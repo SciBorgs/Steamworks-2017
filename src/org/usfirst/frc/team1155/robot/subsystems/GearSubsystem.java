@@ -17,6 +17,7 @@ public class GearSubsystem extends Subsystem {
 	public static DoubleSolenoid ds;
 	public static Ultrasonic us;
 	
+	//Min and max distances for the wall and the gear when it is in the robot 
 	public static final double FARTHEST_FROM_WALL = 0.0;
 	public static final double CLOSEST_TO_WALL = 0.0;
 	public static final double GEAR_CLOSEST = 0.0;
@@ -27,6 +28,7 @@ public class GearSubsystem extends Subsystem {
     	us = new Ultrasonic(PortMap.ULTRASONIC_PING, PortMap.ULTRASONIC_ECHO);//, Ultrasonic.Unit.kInches);
 	}
 	
+	//Checks whether the robot is in a suitable distance from the wall
 	public boolean validDistFromWall(){
 		if(us.getRangeInches() <= FARTHEST_FROM_WALL && us.getRangeInches() >= CLOSEST_TO_WALL){
 			return true;
@@ -34,6 +36,7 @@ public class GearSubsystem extends Subsystem {
 		return false;
 	}
 	
+	//Uses ultrasonic to detect wether the gear is in the robot
 	public boolean hasGear(){
 		if(us.getRangeInches() <= GEAR_FARTHEST && us.getRangeInches() >= GEAR_CLOSEST){
 			return true;
@@ -41,10 +44,12 @@ public class GearSubsystem extends Subsystem {
 		return false;
 	}
 	
+	//Opens solenoid
 	public void open(){
 		ds.set(DoubleSolenoid.Value.kForward);
 	}
 	
+	//Closes solenoid
 	public void close(){
 		ds.set(DoubleSolenoid.Value.kForward);
 	}
