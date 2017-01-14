@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1155.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team1155.robot.Robot;
@@ -10,11 +10,11 @@ import org.usfirst.frc.team1155.robot.subsystems.ClimbSubsystem;
  *
  */
 public class ClimbCommand extends Command {
-	
-	public static Joystick cButton;
-	
-	private ClimbSubsystem climb = Robot.climb;	
-	
+
+	public static JoystickButton cButton;
+
+	private ClimbSubsystem climb = Robot.climb;
+
 	public ClimbCommand() {
 		requires(Robot.climb);
 	}
@@ -28,7 +28,9 @@ public class ClimbCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		climb.climbUp();
+		if (cButton.get()) {
+			climb.climbUp();
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
