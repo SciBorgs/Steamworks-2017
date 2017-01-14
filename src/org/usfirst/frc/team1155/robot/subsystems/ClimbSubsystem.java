@@ -1,18 +1,49 @@
-package org.usfirst.frc.team1155.robot.subsystems;
+package org.usfirst.frc.team1155.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team1155.robot.Robot;
+import org.usfirst.frc.team1155.robot.subsystems.ClimbSubsystem;
 
 /**
  *
  */
-public class ClimbSubsystem extends Subsystem {
+public class ClimbCommand extends Command {
+	
+	public static Joystick cButton;
+	
+	private ClimbSubsystem climb = Robot.oCLimb;	
+	
+	//public ExampleCommand() {
+		// Use requires() here to declare subsystem dependencies
+	//	requires(Robot.exampleSubsystem);
+	//}
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+	}
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
+
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
 }
-
