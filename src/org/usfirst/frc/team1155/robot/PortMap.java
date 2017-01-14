@@ -26,4 +26,5 @@ public class PortMap {
 	public static final int XBOX_CONTROLLER_BACK = 7;
 	public static final int XBOX_CONTROLLER_START = 8;
 	
+	public static final int SPIN_TUBE_TALON = 21;
 }
