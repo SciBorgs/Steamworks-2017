@@ -7,7 +7,7 @@ import org.usfirst.frc.team1155.robot.Robot;
  *
  */
 public class DepositGearCommand extends Command {
-
+		// Shows if the arms on the shooting mechanism are open or closed
     	boolean ifClosed = true;
     	
 	public DepositGearCommand() {
@@ -24,6 +24,7 @@ public class DepositGearCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	// If the arms on the gear mechanism are closed they will open
     	if(ifClosed){
     		Robot.gearSubsystem.open();
     		ifClosed = false;
@@ -32,7 +33,8 @@ public class DepositGearCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(!ifClosed && !Robot.gearSubsystem.hasGear()){
+        // If the arms on the gear mechanism are open and the gear is not in it(meaning that it is on the airship peg) the arms will close and the command will end 
+    	if(!ifClosed && !Robot.gearSubsystem.hasGear()){
         	Robot.gearSubsystem.close();
         	return true;
         }
