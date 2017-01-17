@@ -1,8 +1,7 @@
 package org.usfirst.frc.team1155.robot.subsystems;
-
+import com.ctre.CANTalon;
 import org.usfirst.frc.team1155.robot.PortMap;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,7 +13,7 @@ public class ClimbSubsystem extends Subsystem {
 
 	private CANTalon spinningTubeTalon; 
 	
-	public ClimbSubsytem() {
+	public void ClimbSubsytem() {
 		spinningTubeTalon = new CANTalon(PortMap.SPIN_TUBE_TALON);
 	}
 	
