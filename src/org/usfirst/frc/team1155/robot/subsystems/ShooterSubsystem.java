@@ -2,9 +2,10 @@ package org.usfirst.frc.team1155.robot.subsystems;
 
 import org.usfirst.frc.team1155.robot.PortMap;
 
-import com.ctre.CanTalon;
+import com.ctre.CANTalon;
 
-import edu.wpi.first.wpilibj.Servo; 
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.command.Subsystem; 
 /**
  *
  */
@@ -19,7 +20,7 @@ public class ShooterSubsystem extends Subsystem {
 	public Servo shooterServo;
 	public void rev(boolean buttonPressed){
 		
-		shooterTalon = new CANTalon(PortMap.SHOOTER_TALON);
+		shooterTalon = new CANTalon(PortMap.LEFT_JOYSTICK_SHOOT_BUTTON);
 		if(buttonPressed){
 			shooterTalon.set(1.0);
 		}
