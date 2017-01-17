@@ -32,5 +32,7 @@ public class PortMap {
 	public static final int LEFT_JOYSTICK_SHOOT_BUTTON = 1;
 	public static final int LEFT_JOYSTICK_RELEASE_BUTTON = 2;
 	
+	public static final int SHOOTER_SERVO = 15;
+	
 	public static final int SPIN_TUBE_TALON = 21;
 }
