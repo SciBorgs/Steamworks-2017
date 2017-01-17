@@ -1,7 +1,11 @@
 package org.usfirst.frc.team1155.robot.commands;
 import org.usfirst.frc.team1155.robot.PortMap;
+import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
@@ -9,10 +13,10 @@ public class ShootCommand extends Command {
 	
 	private static Joystick leftJoy;
 	private static JoystickButton button;
-	private ShooterSubsystem fire = new ShooterSubsystem();
+
 
     public ShootCommand() {
-    	requires(fire);
+    	requires(Robot.shootSubsystem);
     	leftJoy = new Joystick(PortMap.LEFT_JOYSTICK);
     	button = new JoystickButton(leftJoy , PortMap.LEFT_JOYSTICK_SHOOT_BUTTON);
     	
@@ -20,15 +24,19 @@ public class ShootCommand extends Command {
         // eg. requires(chassis);
     }
 
-    // Called just before this Command runs the first time
+    private void requires(ShooterSubsystem shoot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.shootSubsystem.stopWheel();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	fire.rev(button.get());
-    	
+    	Robot.shootSubsystem.rev(button.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +46,7 @@ public class ShootCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	fire.stopWheel();
+    	Robot.shootSubsystem.stopWheel();
     }
 
     // Called when another command which requires one or more of the same
