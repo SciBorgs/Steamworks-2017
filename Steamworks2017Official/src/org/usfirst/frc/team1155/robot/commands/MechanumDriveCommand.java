@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+import org.usfirst.frc.team1155.robot.OI;
 import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem.DriveMode;
 
@@ -14,8 +15,8 @@ public class MechanumDriveCommand extends Command {
     public MechanumDriveCommand() {
         requires(Robot.driveSubsystem);
         
-        lateralMovement = Robot.driveSubsystem.rightJoystick;
-        rotationalMovement = Robot.driveSubsystem.leftJoystick;
+        lateralMovement = OI.rightJoystick;
+        rotationalMovement = OI.leftJoystick;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class MechanumDriveCommand extends Command {
 
     @Override
 	protected boolean isFinished() {
-        return false;
+        return Robot.driveSubsystem.getDriveMode() != DriveMode.MECHANUM;
     }
 
     @Override

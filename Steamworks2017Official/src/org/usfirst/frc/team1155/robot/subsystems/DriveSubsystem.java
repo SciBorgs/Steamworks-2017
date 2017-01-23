@@ -20,9 +20,7 @@ public class DriveSubsystem extends Subsystem {
 	
 	public CANTalon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
 	public static DoubleSolenoid[] frontPivots, backPivots;
-	
-	public Joystick leftJoystick, rightJoystick;
-	
+		
 	public static DriveMode driveMode;
 	
 	public DriveSubsystem() {	
@@ -41,30 +39,24 @@ public class DriveSubsystem extends Subsystem {
 //				new DoubleSolenoid(PortMap.DRIVE_BACK_LEFT_PISTON[0], PortMap.DRIVE_BACK_LEFT_PISTON[1]), 
 //				new DoubleSolenoid(PortMap.DRIVE_BACK_RIGHT_PISTON[0], PortMap.DRIVE_BACK_RIGHT_PISTON[1])
 //		};
-		
-		leftJoystick = new Joystick(PortMap.JOYSTICK_LEFT);
-		rightJoystick = new Joystick(PortMap.JOYSTICK_RIGHT);
-		
+				
 		driveMode = DriveMode.TANK;
 	}
 	
 	public void setSpeed(Joystick lateralJoy, Joystick rotationalJoy) {
 		switch(driveMode) {
 		case TANK:
-			setTankSpeed(-rotationalJoy.getY(), -lateralJoy.getY());
-			
+			setTankSpeed(-rotationalJoy.getY(), -lateralJoy.getY()); 
 			break;
 		case MECHANUM:	
 			double yVal = -lateralJoy.getY();
 			double xVal = lateralJoy.getX();
 			double rotationalVal = rotationalJoy.getX();
-			setMechSpeed(xVal, yVal, rotationalVal);
-			
+			setMechSpeed(xVal, yVal, rotationalVal); 
 			break;
 		default:
 			SmartDashboard.putString("Drive Error", "No DriveMode!!!");
 		}
-		
 	}
 	
 	public void setTankSpeed(double leftVal, double rightVal) {

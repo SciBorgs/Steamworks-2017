@@ -15,7 +15,7 @@ import org.usfirst.frc.team1155.robot.commands.ServoCommand;
 import org.usfirst.frc.team1155.robot.commands.SteadySpeedCommand;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
-import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem.ServoMode;
+import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem.ServoPosition;
 
 public class Robot extends IterativeRobot {
 
@@ -24,8 +24,6 @@ public class Robot extends IterativeRobot {
 	
 	public static Command mechanumDriveCommand, gyroCommand, servoCommand;
 	
-	public static OI oi;
-
 	public static ADXRS450_Gyro gyro;
 
 	@Override
@@ -34,8 +32,6 @@ public class Robot extends IterativeRobot {
 
 		driveSubsystem = new DriveSubsystem();
 		shooterSubsystem = new ShooterSubsystem();
-		
-		oi = new OI();		
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+import org.usfirst.frc.team1155.robot.OI;
 import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem.DriveMode;
 
@@ -22,7 +23,7 @@ public class GyroDriveStraightCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	targetAngle = Robot.gyro.getAngle();
-    	//switch to tankmode
+    	Robot.driveSubsystem.setDriveMode(DriveMode.TANK);
     	Robot.driveSubsystem.setTankSpeed(speed, speed);
     }
 
@@ -40,12 +41,11 @@ public class GyroDriveStraightCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.driveSubsystem.rightJoystick.getRawButton(1);
+        return !OI.rightJoystick.getRawButton(1);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("ended");
     	Robot.driveSubsystem.setTankSpeed(0, 0);
     }
 

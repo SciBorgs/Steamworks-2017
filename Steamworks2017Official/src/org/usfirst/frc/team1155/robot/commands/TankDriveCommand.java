@@ -2,6 +2,7 @@ package org.usfirst.frc.team1155.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team1155.robot.OI;
 import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem.DriveMode;
 
@@ -26,12 +27,12 @@ public class TankDriveCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.driveSubsystem.setSpeed(Robot.driveSubsystem.leftJoystick, Robot.driveSubsystem.rightJoystick);
+		Robot.driveSubsystem.setSpeed(OI.leftJoystick, OI.rightJoystick);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return Robot.driveSubsystem.getDriveMode() != DriveMode.TANK;
 	}
 
 	@Override

@@ -15,4 +15,7 @@ public class PortMap {
 	public static final int[] DRIVE_BACK_LEFT_PISTON = {3,4};
 	public static final int[] DRIVE_BACK_RIGHT_PISTON = {4,5};
 	
+	public static final int SHOOT_TALON = 14;
+	public static final int SHOOT_SERVO = 0;
+	
 }
