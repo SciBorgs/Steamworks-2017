@@ -1,13 +1,10 @@
 package org.usfirst.frc.team1155.robot;
 
-import org.usfirst.frc.team1155.robot.commands.BackMechDriveCommand;
-import org.usfirst.frc.team1155.robot.commands.FrontMechDriveCommand;
-import org.usfirst.frc.team1155.robot.commands.MechanumDriveCommand;
+import org.usfirst.frc.team1155.robot.commands.ClimbCommand;
+import org.usfirst.frc.team1155.robot.commands.DriveCommand;
 import org.usfirst.frc.team1155.robot.commands.ReleaseCommand;
 import org.usfirst.frc.team1155.robot.commands.ShootCommand;
-import org.usfirst.frc.team1155.robot.commands.TankDriveCommand;
-import org.usfirst.frc.team1155.robot.commands.ClimbCommand;
-
+import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem.DriveMode;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -64,10 +61,10 @@ public class OI extends Command{
 	}
 	
 	protected void execute(){
-		tank.whenPressed(new TankDriveCommand());
-		mech.whenPressed(new MechanumDriveCommand());
-		frontMech.whenPressed(new FrontMechDriveCommand());
-		backMech.whenPressed(new BackMechDriveCommand());
+		tank.whenPressed(new DriveCommand(DriveMode.TANK));
+		mech.whenPressed(new DriveCommand(DriveMode.MECHANUM));
+		frontMech.whenPressed(new DriveCommand(DriveMode.TURN_FRONT));
+		backMech.whenPressed(new DriveCommand(DriveMode.TURN_BACK));
 		climb.whenPressed(new ClimbCommand());
 		shoot.whenPressed(new ShootCommand());
 		release.whenPressed(new ReleaseCommand());
