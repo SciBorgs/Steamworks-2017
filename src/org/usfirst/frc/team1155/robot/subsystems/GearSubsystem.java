@@ -25,7 +25,7 @@ public class GearSubsystem extends Subsystem {
 	
 	public GearSubsystem(){
 		doubleSolenoid = new DoubleSolenoid(PortMap.GEAR_SOLENOID_FWD, PortMap.GEAR_SOLENOID_REV);
-		doubleSolenoid = new Ultrasonic(PortMap.ULTRASONIC_PING, PortMap.ULTRASONIC_ECHO);//, Ultrasonic.Unit.kInches);
+		ultrasonic = new Ultrasonic(PortMap.ULTRASONIC_PING, PortMap.ULTRASONIC_ECHO);//, Ultrasonic.Unit.kInches);
 	}
 	
 	//Checks whether the robot is in a suitable distance from the wall
