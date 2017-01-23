@@ -12,10 +12,10 @@ public class DriveCommand extends Command{
 	
 	private DriveMode desiredMode;
 	
-    public DriveCommand(DriveMode mode) {
-        requires(Robot.driveSubsystem);
-        desiredMode = mode;
-    }
+   	public DriveCommand(DriveMode mode) {
+      		requires(Robot.driveSubsystem);
+        	desiredMode = mode;
+	}
 	
 	@Override
 	protected void initialize() {
