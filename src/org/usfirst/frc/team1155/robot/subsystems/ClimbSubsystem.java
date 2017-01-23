@@ -13,7 +13,7 @@ public class ClimbSubsystem extends Subsystem {
 
 	private CANTalon spinningTubeTalon; 
 	
-	public void ClimbSubsytem() {
+	public ClimbSubsystem() {
 		spinningTubeTalon = new CANTalon(PortMap.SPIN_TUBE_TALON);
 	}
 	
