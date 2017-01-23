@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShootCommand extends Command {
 	
 	private static ShooterSubsystem shooter = new ShooterSubsystem();
+	private double someExtremelyArbitraryShootingSpeed = 1.0;
 
 
     public ShootCommand() {
@@ -31,7 +32,7 @@ public class ShootCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	shooter.setSpeedOfTheWheelThatShootsTheBalls(1);
+    	shooter.setSpeedOfTheWheelThatShootsTheBalls(someExtremelyArbitraryShootingSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -19,6 +19,9 @@ public class ShooterSubsystem extends Subsystem {
 	public CANTalon shooterTalon;
 	public Servo shooterServo;
 	
+	private double servoToggleSpeed = 0.5;
+	
+	
 	public ShooterSubsystem(){
 		shooterTalon = new CANTalon(PortMap.SHOOTER_TALON);
 		shooterServo = new Servo(PortMap.SHOOTER_SERVO);
@@ -33,7 +36,7 @@ public class ShooterSubsystem extends Subsystem {
 	 * 
 	 */
 	public void toggleRelease(){
-		shooterServo.set(.5);
+		shooterServo.set(servoToggleSpeed);
 	}
 	
 
