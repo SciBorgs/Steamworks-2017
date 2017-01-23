@@ -4,6 +4,8 @@ import org.usfirst.frc.team1155.robot.commands.BackMechDriveCommand;
 import org.usfirst.frc.team1155.robot.commands.FrontMechDriveCommand;
 import org.usfirst.frc.team1155.robot.commands.MechanumDriveCommand;
 import org.usfirst.frc.team1155.robot.commands.TankDriveCommand;
+import org.usfirst.frc.team1155.robot.commands.ClimbCommand;
+
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -43,7 +45,7 @@ public class OI extends Command{
 	
 	public static XboxController gamepad = new XboxController(PortMap.XBOX_CONTROLLER);
 	
-	private JoystickButton tank,mech,frontMech,backMech;
+	private JoystickButton tank,mech,frontMech,backMech, climb;
 	
 	
 	public OI() { //change these buttons later
@@ -51,6 +53,7 @@ public class OI extends Command{
 		mech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_B);
 		frontMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_X);
 		backMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_Y);
+		climb = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_LB);
 	}
 	
 	protected void initialize() {
@@ -61,7 +64,7 @@ public class OI extends Command{
 		mech.whenPressed(new MechanumDriveCommand());
 		frontMech.whenPressed(new FrontMechDriveCommand());
 		backMech.whenPressed(new BackMechDriveCommand());
-		
+		climb.whenPressed(new ClimbCommand());
 	}
 
 	protected boolean isFinished() {
