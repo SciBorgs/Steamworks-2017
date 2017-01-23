@@ -18,29 +18,22 @@ public class ShooterSubsystem extends Subsystem {
 //	}
 	public CANTalon shooterTalon;
 	public Servo shooterServo;
-	public void rev(boolean buttonPressed){
-		
-		shooterTalon = new CANTalon(PortMap.LEFT_JOYSTICK_SHOOT_BUTTON);
-		if(buttonPressed){
-			shooterTalon.set(1.0);
-		}
+	
+	public ShooterSubsystem(){
+		shooterTalon = new CANTalon(PortMap.SHOOTER_TALON);
+		shooterServo = new Servo(PortMap.SHOOTER_SERVO);
+	}
+	
+	public void setSpeedOfTheWheelThatShootsTheBalls(double gottaGoFast){
+		shooterTalon.set(gottaGoFast);
 		
 	}
 	
 	/**
 	 * 
 	 */
-	public void toggleRelease(boolean buttonPressed){
-		shooterServo = new Servo(PortMap.SHOOTER_SERVO);
-		if(buttonPressed){
-			shooterServo.set(1.0);
-		} else {
-			shooterServo.set(0.0);
-		}	
-	}
-	
-	public void stopWheel(){
-		shooterTalon.set(0.0);
+	public void toggleRelease(){
+		shooterServo.set(.5);
 	}
 	
 

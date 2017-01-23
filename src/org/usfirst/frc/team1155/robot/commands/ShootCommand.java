@@ -3,22 +3,17 @@ import org.usfirst.frc.team1155.robot.PortMap;
 import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
 public class ShootCommand extends Command {
 	
-	private static Joystick leftJoy;
-	private static JoystickButton button;
+	private static ShooterSubsystem shooter = new ShooterSubsystem();
 
 
     public ShootCommand() {
     	requires(Robot.shootSubsystem);
-    	leftJoy = new Joystick(PortMap.LEFT_JOYSTICK);
-    	button = new JoystickButton(leftJoy , PortMap.LEFT_JOYSTICK_SHOOT_BUTTON);
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -31,12 +26,12 @@ public class ShootCommand extends Command {
 
 	// Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shootSubsystem.stopWheel();
+    	shooter.setSpeedOfTheWheelThatShootsTheBalls(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shootSubsystem.rev(button.get());
+    	shooter.setSpeedOfTheWheelThatShootsTheBalls(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,7 +41,7 @@ public class ShootCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shootSubsystem.stopWheel();
+    	shooter.setSpeedOfTheWheelThatShootsTheBalls(0);
     }
 
     // Called when another command which requires one or more of the same

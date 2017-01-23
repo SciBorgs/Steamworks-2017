@@ -3,6 +3,8 @@ package org.usfirst.frc.team1155.robot;
 import org.usfirst.frc.team1155.robot.commands.BackMechDriveCommand;
 import org.usfirst.frc.team1155.robot.commands.FrontMechDriveCommand;
 import org.usfirst.frc.team1155.robot.commands.MechanumDriveCommand;
+import org.usfirst.frc.team1155.robot.commands.ReleaseCommand;
+import org.usfirst.frc.team1155.robot.commands.ShootCommand;
 import org.usfirst.frc.team1155.robot.commands.TankDriveCommand;
 import org.usfirst.frc.team1155.robot.commands.ClimbCommand;
 
@@ -45,7 +47,7 @@ public class OI extends Command{
 	
 	public static XboxController gamepad = new XboxController(PortMap.XBOX_CONTROLLER);
 	
-	private JoystickButton tank,mech,frontMech,backMech, climb;
+	private JoystickButton tank,mech,frontMech,backMech, climb, shoot, release;
 	
 	
 	public OI() { //change these buttons later
@@ -54,6 +56,8 @@ public class OI extends Command{
 		frontMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_X);
 		backMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_Y);
 		climb = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_LB);
+		shoot = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RT);
+		release = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RB);
 	}
 	
 	protected void initialize() {
@@ -65,10 +69,24 @@ public class OI extends Command{
 		frontMech.whenPressed(new FrontMechDriveCommand());
 		backMech.whenPressed(new BackMechDriveCommand());
 		climb.whenPressed(new ClimbCommand());
+		shoot.whenPressed(new ShootCommand());
+		release.whenPressed(new ReleaseCommand());
 	}
 
 	protected boolean isFinished() {
 		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

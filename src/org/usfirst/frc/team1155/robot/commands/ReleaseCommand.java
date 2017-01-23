@@ -4,8 +4,6 @@ import org.usfirst.frc.team1155.robot.PortMap;
 import org.usfirst.frc.team1155.robot.Robot;
 import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,14 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ReleaseCommand extends Command {
 	
-	private static Joystick leftJoy;
-	private static JoystickButton button;
+	private static ShooterSubsystem servo = new ShooterSubsystem();
 
     public ReleaseCommand() {
 		
 		requires(Robot.shootSubsystem);
-    	leftJoy = new Joystick(PortMap.LEFT_JOYSTICK);
-    	button = new JoystickButton(leftJoy , PortMap.LEFT_JOYSTICK_RELEASE_BUTTON);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -36,7 +31,7 @@ public class ReleaseCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shootSubsystem.toggleRelease(button.get());
+    	servo.toggleRelease();
     }
 
     // Make this return true when this Command no longer needs to run execute()
