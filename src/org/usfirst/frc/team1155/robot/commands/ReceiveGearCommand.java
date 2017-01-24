@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RecieveGearCommand extends Command {
+public class ReceiveGearCommand extends Command {
 	// short for gear opportunity and is true when there is a situation where the gear can get into the robot
 	boolean gearOpp = false;
 	private GearSubsystem gearSubsystem = Robot.gearSubsystem;
 	
-    public RecieveGearCommand() {
+    public ReceiveGearCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(gearSubsystem);
