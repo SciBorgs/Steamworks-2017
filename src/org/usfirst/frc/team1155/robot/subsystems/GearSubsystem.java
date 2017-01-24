@@ -28,13 +28,18 @@ public class GearSubsystem extends Subsystem {
 		ultrasonic = new Ultrasonic(PortMap.ULTRASONIC_PING, PortMap.ULTRASONIC_ECHO);//, Ultrasonic.Unit.kInches);
 	}
 	
+	public void enableUltrasonic() {
+		ultrasonic.setEnabled(true);
+	}
+	
 	//Checks whether the robot is in a suitable distance from the wall
 	public boolean validDistFromWall(){
-		return (us.getRangeInches() <= FARTHEST_FROM_WALL && us.getRangeInches() >= CLOSEST_TO_WALL);
+		return (ultrasonic.getRangeInches() <= FARTHEST_FROM_WALL && ultrasonic.getRangeInches() >= CLOSEST_TO_WALL);
+	}  
 	
 	//Uses ultrasonic to detect wether the gear is in the robot
 	public boolean hasGear(){
-		return (us.getRangeInches() <= GEAR_FARTHEST && us.getRangeInches() >= GEAR_CLOSEST);
+		return (ultrasonic.getRangeInches() <= GEAR_FARTHEST && ultrasonic.getRangeInches() >= GEAR_CLOSEST);
 	}
 	
 	//Opens solenoid

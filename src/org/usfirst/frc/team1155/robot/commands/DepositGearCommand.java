@@ -12,7 +12,8 @@ public class DepositGearCommand extends Command {
 		// Shows if the arms on the shooting mechanism are open or closed
     	boolean ifClosed = true; 
     	private GearSubsystem gearSubsystem = Robot.gearSubsystem;  
-	public DepositGearCommand() {
+	
+    public DepositGearCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(gearSubsystem);
@@ -21,6 +22,7 @@ public class DepositGearCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	gearSubsystem.enableUltrasonic();
     	gearSubsystem.close();
     }
 
