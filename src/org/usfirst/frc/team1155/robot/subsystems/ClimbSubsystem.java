@@ -17,7 +17,7 @@ public class ClimbSubsystem extends Subsystem {
 
 	public ClimbSubsystem() {
 		spinningTubeTalon = new CANTalon(PortMap.SPIN_TUBE_TALON);
-		encoderForSpinningTubeTalon = new Encoder(PortMap.SpinTubeSource1, PortMap.SpinTubeSource2);
+		encoderForSpinningTubeTalon = new Encoder(PortMap.SPIN_TUBE_SOURCE2, PortMap.SPIN_TUBE_SOURCE2);
 	}
 
 	public void climbUp() {
