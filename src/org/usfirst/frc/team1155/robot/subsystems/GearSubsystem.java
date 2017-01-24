@@ -14,7 +14,7 @@ public class GearSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	public static DoubleSolenoid doubleSolenoid;
+	public static DoubleSolenoid leftDoubleSolenoid, rightDoubleSolenoid;
 	public static Ultrasonic ultrasonic;
 	
 	//Min and max distances for the wall and the gear when it is in the robot 
@@ -24,7 +24,8 @@ public class GearSubsystem extends Subsystem {
 	public static final double GEAR_FARTHEST = 0.0;
 	
 	public GearSubsystem(){
-		doubleSolenoid = new DoubleSolenoid(PortMap.GEAR_SOLENOID_FWD, PortMap.GEAR_SOLENOID_REV);
+		leftDoubleSolenoid = new DoubleSolenoid(PortMap.LEFT_GEAR_SOLENOID_FWD, PortMap.LEFT_GEAR_SOLENOID_REV);
+		rightDoubleSolenoid = new DoubleSolenoid(PortMap.RIGHT_GEAR_SOLENOID_FWD, PortMap.RIGHT_GEAR_SOLENOID_REV);
 		ultrasonic = new Ultrasonic(PortMap.ULTRASONIC_PING, PortMap.ULTRASONIC_ECHO);//, Ultrasonic.Unit.kInches);
 	}
 	
@@ -44,12 +45,14 @@ public class GearSubsystem extends Subsystem {
 	
 	//Opens solenoid
 	public void open(){
-		doubleSolenoid.set(DoubleSolenoid.Value.kForward);
+		leftDoubleSolenoid.set(DoubleSolenoid.Value.kForward);
+		rightDoubleSolenoid.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	//Closes solenoid
 	public void close(){
-		doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
+		leftDoubleSolenoid.set(DoubleSolenoid.Value.kReverse);
+		rightDoubleSolenoid.set(DoubleSolenoid.Value.kReverse);
 	}
 	
     public void initDefaultCommand() {
