@@ -27,8 +27,8 @@ public class ShooterSubsystem extends Subsystem {
 		shooterServo = new Servo(PortMap.SHOOTER_SERVO);
 	}
 	
-	public void setSpeedOfTheWheelThatShootsTheBalls(double gottaGoFast){
-		shooterTalon.set(gottaGoFast);
+	public void setWheelSpeed(double speed){
+		shooterTalon.set(speed);
 		
 	}
 	
