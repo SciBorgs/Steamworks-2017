@@ -32,8 +32,8 @@ public class PortMap {
 	
 	public static final int SHOOTER_SERVO = 15;
 	
-	public static final int SPIN_TUBE_TALON = 21;
-	public static final int SPIN_TUBE_SOURCE1 = 42;
-	public static final int SPIN_TUBE_SOURCE2 = 42;
+	public static final int CLIMB_TALON = 21;
+	public static final int CLIMB_SOURCE1 = 42;
+	public static final int CLIMB_SOURCE2 = 42;
 	public static final int SHOOTER_TALON = 69;
 }
