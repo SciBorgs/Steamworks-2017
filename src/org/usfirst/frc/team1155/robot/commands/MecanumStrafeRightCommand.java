@@ -5,11 +5,11 @@ import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
 /**
  *
  */
-public class MecanumStrafeRight extends Command {
+public class MecanumStrafeRightCommand extends Command {
 
 	DriveSubsystem driveSubsystem = new DriveSubsystem();
 	
-    public MecanumStrafeRight() {
+    public MecanumStrafeRightCommand() {
         requires(driveSubsystem);
     }
 
