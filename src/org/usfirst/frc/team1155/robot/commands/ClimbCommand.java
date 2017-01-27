@@ -26,22 +26,23 @@ public class ClimbCommand extends Command {
 	@Override
 	protected void initialize() {
 		climb.halt();
-		climb.resetEncoder();
+		//climb.resetEncoder();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		climb.climbUp();
-		if (climb.getEncoder() == 360) {
-			encoderFullRotations++;
-		}
+//		if (climb.getEncoder() == 360) {
+//			encoderFullRotations++;
+//		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return (circumferenceOfSpinnyThing * encoderFullRotations >= ropeLength);
+		//return (circumferenceOfSpinnyThing * encoderFullRotations >= ropeLength);
+		return false;
 	}
 
 	// Called once after isFinished returns true

@@ -20,10 +20,10 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	public static final ClimbSubsystem climb = new ClimbSubsystem();
-	public static final GearSubsystem gearSubsystem = new GearSubsystem();
-	public static final ShooterSubsystem shootSubsystem = new ShooterSubsystem();
+	public static DriveSubsystem driveSubsystem;
+	public static ClimbSubsystem climb;
+	public static GearSubsystem gearSubsystem;
+	public static ShooterSubsystem shootSubsystem;
 	public static OI oi;
 
     Command autonomousCommand;
@@ -34,6 +34,11 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	driveSubsystem = new DriveSubsystem();
+    	climb = new ClimbSubsystem();
+    	gearSubsystem = new GearSubsystem();
+    	shootSubsystem = new ShooterSubsystem();
+    	
 		oi = new OI();
         // instantiate the command used for the autonomous period
         //autonomousCommand = new ExampleCommand();
@@ -63,6 +68,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        oi = new OI();
+        oi.start();
     }
 
     /**

@@ -26,20 +26,30 @@ public class DriveCommand extends Command{
 	protected void execute() {
 		switch(Robot.driveSubsystem.getDriveMode()){
 			case MECHANUM:
-				Robot.driveSubsystem.setMechSpeed(OI.gamepad.getX(GenericHID.Hand.kLeft),OI.gamepad.getY(GenericHID.Hand.kLeft),OI.gamepad.getX(GenericHID.Hand.kRight));
+//				Robot.driveSubsystem.setMechSpeed(OI.gamepad.getX(GenericHID.Hand.kLeft),
+//												  OI.gamepad.getY(GenericHID.Hand.kLeft),
+//												  OI.gamepad.getX(GenericHID.Hand.kRight));
+				Robot.driveSubsystem.setMechSpeed(OI.gamepad.getX(GenericHID.Hand.kLeft),
+						  						  OI.gamepad.getY(GenericHID.Hand.kLeft),
+						  						  OI.gamepad.getX(GenericHID.Hand.kRight));
 				break;
 			case TANK:
-				Robot.driveSubsystem.setTankSpeed(OI.gamepad.getY(GenericHID.Hand.kLeft), OI.gamepad.getY(GenericHID.Hand.kRight));
+				Robot.driveSubsystem.setTankSpeed(OI.gamepad.getY(GenericHID.Hand.kLeft), 
+												  OI.gamepad.getY(GenericHID.Hand.kRight));
 				break;
 			case TURN_FRONT:
-				Robot.driveSubsystem.setTankSpeed(OI.gamepad.getY(GenericHID.Hand.kLeft), OI.gamepad.getY(GenericHID.Hand.kRight));
+				Robot.driveSubsystem.setTankSpeed(OI.gamepad.getY(GenericHID.Hand.kLeft), 
+												  OI.gamepad.getY(GenericHID.Hand.kRight));
 				break;
 			case TURN_BACK:
-				Robot.driveSubsystem.setTankSpeed(OI.gamepad.getY(GenericHID.Hand.kLeft), OI.gamepad.getY(GenericHID.Hand.kRight));
+				Robot.driveSubsystem.setTankSpeed(OI.gamepad.getY(GenericHID.Hand.kLeft), 
+												  OI.gamepad.getY(GenericHID.Hand.kRight));
 				break;
 			default:
 				//Defaults to full MECH
-				Robot.driveSubsystem.setMechSpeed(OI.gamepad.getX(GenericHID.Hand.kLeft),OI.gamepad.getY(GenericHID.Hand.kLeft),OI.gamepad.getX(GenericHID.Hand.kRight));
+				Robot.driveSubsystem.setMechSpeed(OI.gamepad.getX(GenericHID.Hand.kLeft),
+												  OI.gamepad.getY(GenericHID.Hand.kLeft),
+												  OI.gamepad.getX(GenericHID.Hand.kRight));
 				break;
 		}
 	}

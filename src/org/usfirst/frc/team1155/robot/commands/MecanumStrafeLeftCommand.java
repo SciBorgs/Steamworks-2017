@@ -3,6 +3,8 @@ package org.usfirst.frc.team1155.robot.commands;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem.DriveMode;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  */

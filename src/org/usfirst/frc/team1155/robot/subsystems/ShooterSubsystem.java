@@ -16,19 +16,19 @@ public class ShooterSubsystem extends Subsystem {
 //		CLOSED_STATE,
 //		OPEN_STATE; 
 //	}
-	public CANTalon shooterTalon;
-	public Servo shooterServo;
+//	public CANTalon shooterTalon;
+//	public Servo shooterServo;
 	
 	private double servoToggleSpeed = 0.5;
 	
 	
 	public ShooterSubsystem(){
-		shooterTalon = new CANTalon(PortMap.SHOOTER_TALON);
-		shooterServo = new Servo(PortMap.SHOOTER_SERVO);
+//		shooterTalon = new CANTalon(PortMap.SHOOTER_TALON);
+//		shooterServo = new Servo(PortMap.SHOOTER_SERVO);
 	}
 	
 	public void setWheelSpeed(double speed){
-		shooterTalon.set(speed);
+		//shooterTalon.set(speed);
 		
 	}
 	
@@ -36,7 +36,7 @@ public class ShooterSubsystem extends Subsystem {
 	 * 
 	 */
 	public void toggleRelease(){
-		shooterServo.set(servoToggleSpeed);
+		//shooterServo.set(servoToggleSpeed);
 	}
 	
 

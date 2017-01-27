@@ -15,7 +15,7 @@ public class DriveSubsystem extends Subsystem {
     }
    
     public CANTalon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
-    public static DoubleSolenoid[] frontPivots, backPivots;
+    //public static DoubleSolenoid[] frontPivots, backPivots;
     
    
     public static DriveMode driveMode;
@@ -26,11 +26,15 @@ public class DriveSubsystem extends Subsystem {
         backLeftMotor = new CANTalon(PortMap.BACK_LEFT_TALON);
         backRightMotor = new CANTalon(PortMap.BACK_RIGHT_TALON);
        
-        frontPivots = new DoubleSolenoid[]{new DoubleSolenoid(PortMap.FRONT_PIVOT_SOLENOIDS[0][0], PortMap.FRONT_PIVOT_SOLENOIDS[0][1]), 
-        								   new DoubleSolenoid(PortMap.FRONT_PIVOT_SOLENOIDS[1][0], PortMap.FRONT_PIVOT_SOLENOIDS[1][1])};
-    
-        backPivots = new DoubleSolenoid[]{new DoubleSolenoid(PortMap.BACK_PIVOT_SOLENOIDS[0][0], PortMap.BACK_PIVOT_SOLENOIDS[0][1]), 
-        		                          new DoubleSolenoid(PortMap.BACK_PIVOT_SOLENOIDS[1][0], PortMap.BACK_PIVOT_SOLENOIDS[1][1])};
+//        frontPivots = new DoubleSolenoid[]{new DoubleSolenoid(PortMap.FRONT_PIVOT_SOLENOIDS[0][0], 
+//        													  PortMap.FRONT_PIVOT_SOLENOIDS[0][1]), 
+//        								   new DoubleSolenoid(PortMap.FRONT_PIVOT_SOLENOIDS[1][0], 
+//        										              PortMap.FRONT_PIVOT_SOLENOIDS[1][1])};
+//    
+//        backPivots = new DoubleSolenoid[]{new DoubleSolenoid(PortMap.BACK_PIVOT_SOLENOIDS[0][0], 
+//        		                                             PortMap.BACK_PIVOT_SOLENOIDS[0][1]), 
+//        		                          new DoubleSolenoid(PortMap.BACK_PIVOT_SOLENOIDS[1][0], 
+//        		                        		             PortMap.BACK_PIVOT_SOLENOIDS[1][1])};
        
         driveMode = DriveMode.TANK;
     }
@@ -78,15 +82,15 @@ public class DriveSubsystem extends Subsystem {
     }
    
     public void engageFrontWheels(DoubleSolenoid.Value value) {
-        for (DoubleSolenoid frontPivot: frontPivots) {
-            frontPivot.set(value);
-        }
+//        for (DoubleSolenoid frontPivot: frontPivots) {
+//            frontPivot.set(value);
+//        }
     }
    
     public void engageBackWheels(DoubleSolenoid.Value value) {
-        for (DoubleSolenoid backPivot: backPivots) {
-            backPivot.set(value);
-        }
+//        for (DoubleSolenoid backPivot: backPivots) {
+//            backPivot.set(value);
+//        }
     }
    
     public void initDefaultCommand() {
