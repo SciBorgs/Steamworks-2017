@@ -12,7 +12,6 @@ public class ClimbCommand extends Command {
 
 	public static JoystickButton cButton;
 
-	private ClimbSubsystem climb = Robot.climb;
 	private double circumferenceOfSpinnyThing = 6; // not actual circumference
 													// fix later
 	private double ropeLength = 58; // not actual rope distance fix later
@@ -25,14 +24,14 @@ public class ClimbCommand extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		climb.halt();
+		Robot.climb.halt();
 		//climb.resetEncoder();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		climb.climbUp();
+		Robot.climb.climbUp();
 //		if (climb.getEncoder() == 360) {
 //			encoderFullRotations++;
 //		}
@@ -48,7 +47,7 @@ public class ClimbCommand extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		climb.halt();
+		Robot.climb.halt();
 	}
 
 	// Called when another command which requires one or more of the same

@@ -10,27 +10,26 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DepositGearCommand extends Command {
 		// Shows if the arms on the shooting mechanism are open or closed
-    	boolean isClosed = true; 
-    	private GearSubsystem gearSubsystem = Robot.gearSubsystem;  
+    	boolean isClosed = true;  
 	
     public DepositGearCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(gearSubsystem);
+    	requires(Robot.gearSubsystem);
 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	gearSubsystem.enableUltrasonic();
-    	gearSubsystem.close();
+    	Robot.gearSubsystem.enableUltrasonic();
+    	Robot.gearSubsystem.close();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// If the arms on the gear mechanism are closed they will open
     	if(isClosed){
-    		gearSubsystem.open();
+    		Robot.gearSubsystem.open();
     		isClosed = false;
     	}
     }
@@ -38,8 +37,8 @@ public class DepositGearCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         // If the arms on the gear mechanism are open and the gear is not in it(meaning that it is on the airship peg) the arms will close and the command will end 
-    	if(!isClosed && !gearSubsystem.hasGear()){
-    		gearSubsystem.close();
+    	if(!isClosed && !Robot.gearSubsystem.hasGear()){
+    		Robot.gearSubsystem.close();
         	return true;
         }
     	return false;

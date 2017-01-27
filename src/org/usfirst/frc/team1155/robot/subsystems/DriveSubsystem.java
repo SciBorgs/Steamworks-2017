@@ -6,6 +6,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
  
 public class DriveSubsystem extends Subsystem {
@@ -16,7 +17,6 @@ public class DriveSubsystem extends Subsystem {
    
     public CANTalon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     //public static DoubleSolenoid[] frontPivots, backPivots;
-    
    
     public static DriveMode driveMode;
    
@@ -35,7 +35,7 @@ public class DriveSubsystem extends Subsystem {
 //        		                                             PortMap.BACK_PIVOT_SOLENOIDS[0][1]), 
 //        		                          new DoubleSolenoid(PortMap.BACK_PIVOT_SOLENOIDS[1][0], 
 //        		                        		             PortMap.BACK_PIVOT_SOLENOIDS[1][1])};
-       
+        
         driveMode = DriveMode.TANK;
     }
    

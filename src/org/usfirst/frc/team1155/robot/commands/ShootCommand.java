@@ -10,10 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShootCommand extends Command {
 	
-	private static ShooterSubsystem shooter = new ShooterSubsystem();
-
-
-    public ShootCommand() {
+	public ShootCommand() {
     	requires(Robot.shootSubsystem);
     	
         // Use requires() here to declare subsystem dependencies
@@ -27,12 +24,12 @@ public class ShootCommand extends Command {
 
 	// Called just before this Command runs the first time
     protected void initialize() {
-    	shooter.setWheelSpeed(0);
+    	Robot.shootSubsystem.setWheelSpeed(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	shooter.setWheelSpeed(1);
+    	Robot.shootSubsystem.setWheelSpeed(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +39,7 @@ public class ShootCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	shooter.setWheelSpeed(0);
+    	Robot.shootSubsystem.setWheelSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
