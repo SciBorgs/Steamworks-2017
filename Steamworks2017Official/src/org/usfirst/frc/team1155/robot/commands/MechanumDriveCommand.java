@@ -21,8 +21,8 @@ public class MechanumDriveCommand extends Command {
 
     @Override
 	protected void initialize() {
-    	Robot.driveSubsystem.setMechSpeed(0, 0, 0);
     	Robot.driveSubsystem.setDriveMode(DriveMode.MECHANUM);
+    	Robot.driveSubsystem.setMechSpeed(0, 0, 0);
     }
 
     @Override

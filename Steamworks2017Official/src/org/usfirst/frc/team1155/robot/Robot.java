@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1155.robot.commands.MechanumDriveCommand;
-import org.usfirst.frc.team1155.robot.commands.ServoCommand;
+import org.usfirst.frc.team1155.robot.commands.ShootCommand;
 import org.usfirst.frc.team1155.robot.commands.SteadySpeedCommand;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
@@ -22,8 +22,6 @@ public class Robot extends IterativeRobot {
 	public static DriveSubsystem driveSubsystem; 
 	public static ShooterSubsystem shooterSubsystem;
 	
-	public static Command mechanumDriveCommand, gyroCommand, servoCommand;
-	
 	public static ADXRS450_Gyro gyro;
 
 	@Override
@@ -33,17 +31,20 @@ public class Robot extends IterativeRobot {
 		driveSubsystem = new DriveSubsystem();
 		shooterSubsystem = new ShooterSubsystem();
 	}
-
+	
 	@Override
-	public void disabledInit() {
+	public void teleopInit() {
 		gyro.reset();
+		
+		new MechanumDriveCommand().start(); 
 	}
 
 	@Override
-	public void disabledPeriodic() {
+	public void teleopPeriodic() {
+    	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
 		Scheduler.getInstance().run();
 	}
-
+	
 	@Override
 	public void autonomousInit() {
 		
@@ -54,20 +55,14 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 
-	@Override
-	public void teleopInit() {
-		gyro.reset();
 
-		mechanumDriveCommand = new SteadySpeedCommand();
-		mechanumDriveCommand.start();
-		
-//		servoCommand = new ServoCommand(ServoMode.MODE1);
-//		servoCommand.start();
+	@Override
+	public void disabledInit() {
+		gyro.reset();
 	}
 
 	@Override
-	public void teleopPeriodic() {
-    	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 

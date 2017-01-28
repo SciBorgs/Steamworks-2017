@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ServoCommand extends Command {
+public class ShootCommand extends Command {
 	
 	// dont judge me ok we had no time
 	private boolean isFinished = false;
 		
 	private ServoPosition servoPos;
 	
-    public ServoCommand(ServoPosition servoPosition) {
+    public ShootCommand(ServoPosition servoPosition) {
     	requires(Robot.shooterSubsystem);
     	
     	servoPos = servoPosition;
@@ -23,6 +23,8 @@ public class ServoCommand extends Command {
 
     protected void initialize() {
         Robot.shooterSubsystem.setServoPosition(servoPos);
+        Robot.shooterSubsystem.setShooterSpeed(1);
+        
         isFinished = true;
     }
 

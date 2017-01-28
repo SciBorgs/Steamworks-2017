@@ -2,6 +2,7 @@ package org.usfirst.frc.team1155.robot.subsystems;
 
 import org.usfirst.frc.team1155.robot.PortMap;
 import org.usfirst.frc.team1155.robot.Robot;
+import org.usfirst.frc.team1155.robot.commands.MechanumDriveCommand;
 
 import com.ctre.CANTalon;
 
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -35,7 +37,7 @@ public class DriveSubsystem extends Subsystem {
 //				new DoubleSolenoid(PortMap.DRIVE_FRONT_RIGHT_PISTON[0], PortMap.DRIVE_FRONT_RIGHT_PISTON[1])
 //		};
 //		
-//		frontPivots = new DoubleSolenoid[] {
+//		backPivots = new DoubleSolenoid[] {
 //				new DoubleSolenoid(PortMap.DRIVE_BACK_LEFT_PISTON[0], PortMap.DRIVE_BACK_LEFT_PISTON[1]), 
 //				new DoubleSolenoid(PortMap.DRIVE_BACK_RIGHT_PISTON[0], PortMap.DRIVE_BACK_RIGHT_PISTON[1])
 //		};
@@ -43,7 +45,8 @@ public class DriveSubsystem extends Subsystem {
 		driveMode = DriveMode.TANK;
 	}
 	
-	public void setSpeed(Joystick lateralJoy, Joystick rotationalJoy) {
+	//call this normally
+	public void setSpeed(Joystick rotationalJoy, Joystick lateralJoy) {
 		switch(driveMode) {
 		case TANK:
 			setTankSpeed(-rotationalJoy.getY(), -lateralJoy.getY()); 
@@ -59,6 +62,7 @@ public class DriveSubsystem extends Subsystem {
 		}
 	}
 	
+	//call this to force tank drive 
 	public void setTankSpeed(double leftVal, double rightVal) {
 		frontRightMotor.set(rightVal);
 	    frontLeftMotor.set(-leftVal);
@@ -66,6 +70,7 @@ public class DriveSubsystem extends Subsystem {
 		backLeftMotor.set(-leftVal);
 	}
 	
+	//call this to force mechanum drive
 	public void setMechSpeed(double xVal, double yVal, double rotationalVal) {
 		frontLeftMotor.set(-xVal - yVal + rotationalVal);
 		frontRightMotor.set(-xVal + yVal + rotationalVal);
@@ -95,6 +100,7 @@ public class DriveSubsystem extends Subsystem {
 			engageBackWheels(Value.kReverse);
 			break;
 		}	
+		
 	}
 		
 	public DriveMode getDriveMode() {
