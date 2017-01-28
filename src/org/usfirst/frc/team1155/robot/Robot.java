@@ -25,7 +25,8 @@ public class Robot extends IterativeRobot {
 	public static GearSubsystem gearSubsystem;
 	public static ShooterSubsystem shootSubsystem;
 	public static OI oi;
-
+	public static ADXRS450_Gyro gyro;
+	
     Command autonomousCommand;
     NetworkTable table;
 
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
     	climb = new ClimbSubsystem();
     	gearSubsystem = new GearSubsystem();
     	shootSubsystem = new ShooterSubsystem();
-    	
+    	gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 		oi = new OI();
         // instantiate the command used for the autonomous period
         //autonomousCommand = new ExampleCommand();

@@ -9,12 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DepositGearCommand extends Command {
-		// Shows if the arms on the shooting mechanism are open or closed
+		// Shows if the arms on the gear mechanism are open or closed
     	boolean isClosed = true;  
 	
     public DepositGearCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.gearSubsystem);
 
     }

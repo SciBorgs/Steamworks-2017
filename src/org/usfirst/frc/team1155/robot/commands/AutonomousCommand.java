@@ -12,7 +12,7 @@ public class AutonomousCommand extends CommandGroup {
 	private final double DISTANCE_TO_BASELINE = 93.25; //inches
 	private final double DISTANCE_TO_PIVOT = 20.35; //inches
 	
-	public enum Position{
+	public enum StartingPosition{
 		POSITION_1, //left driver station
 		POSITION_2, //middle driver station
 		POSITION_3; //right driver station
@@ -20,15 +20,23 @@ public class AutonomousCommand extends CommandGroup {
 	
 	
 	//possible order of auto commands
-    public AutonomousCommand(Position pos) {
+    public AutonomousCommand(StartingPosition pos) {
     	 switch(pos){
-         case POSITION_1: case POSITION_3:
+         case POSITION_1: 
+        	 addSequential(new DistanceDriveCommand(
+          			DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
+          	addSequential(new RotateToPegCommand("right"));
+          	addSequential(new DepositGearCommand());
+          	break;
+         case POSITION_3:
          	addSequential(new DistanceDriveCommand(
          			DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
+         	addSequential(new RotateToPegCommand("left"));
          	addSequential(new DepositGearCommand());
          	break;
          case POSITION_2:
         	addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE));
+        	addSequential(new VisionCommand());
          	break;
          default:
          	break;

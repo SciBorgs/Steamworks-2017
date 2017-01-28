@@ -9,30 +9,29 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RotateToPegCommand extends Command {
 
-	private String rotate;
+	private String directionToRotate;
+	private double initialAngle;
+	private final double TURN_SPEED = 0.25;
 	
-    public RotateToPegCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public RotateToPegCommand(String dir) {
+       directionToRotate = dir;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	//TODO change values to turn robot 
-    	if (rotate == "left") 
-    		Robot.driveSubsystem.setMechSpeed(-1, 1, 0); 
-    	else
-    		Robot.driveSubsystem.setMechSpeed(1, -1, 0);
+    	initialAngle = Robot.gyro.getAngle();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.driveSubsystem.setMechSpeed(0, 0, TURN_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
-        //return Robot.visionSubsystem.isPegTape();
+    	return (directionToRotate.equals("left") && Robot.gyro.getAngle() <= -60) ||
+    			(directionToRotate.equals("right") && Robot.gyro.getAngle() >= 60);
     }
 
     // Called once after isFinished returns true
