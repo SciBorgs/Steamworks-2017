@@ -9,29 +9,31 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DistanceDriveCommand extends Command {
 	
-	private final double DISTANCE_TO_DRIVE = 114; //inches?
 	private double distanceDriven;
+	public double distanceToDrive;
 	
-	public DistanceDriveCommand() {
+	public DistanceDriveCommand(double distance) {
         requires(Robot.driveSubsystem);
         distanceDriven = 0;
         //TODO set proper speed for going straight
-        Robot.driveSubsystem.setMechSpeed(1, 1, 90);
+        distanceToDrive = distance;
+        
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.driveSubsystem.resetEncoders();
+    	Robot.driveSubsystem.resetEncoders();
+    	Robot.driveSubsystem.setMechSpeed(1, 1, 90);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//distanceDriven = Robot.driveSubsystem.getEncDistance();
+    	distanceDriven = Robot.driveSubsystem.getEncDistance();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return distanceDriven > 0 && distanceDriven == DISTANCE_TO_DRIVE;
+        return distanceDriven >= distanceToDrive;
     }
 
     // Called once after isFinished returns true

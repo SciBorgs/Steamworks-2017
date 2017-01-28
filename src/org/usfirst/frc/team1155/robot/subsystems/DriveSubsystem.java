@@ -92,7 +92,18 @@ public class DriveSubsystem extends Subsystem {
 //            backPivot.set(value);
 //        }
     }
-   
+    
+    public void resetEncoders(){
+    	frontLeftMotor.setEncPosition(0);
+    	backLeftMotor.setEncPosition(0);
+    	frontRightMotor.setEncPosition(0);
+    	backRightMotor.setEncPosition(0);
+    }
+    
+    public double getEncDistance(){
+    	return (frontRightTalon.getEncPosition()/1023.0) * (Math.PI * 2 * WHEEL_RADIUS);
+    }
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
