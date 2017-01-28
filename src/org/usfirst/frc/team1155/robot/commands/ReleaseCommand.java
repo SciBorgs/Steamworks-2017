@@ -15,7 +15,7 @@ public class ReleaseCommand extends Command {
 
     public ReleaseCommand() {
 		
-		requires(Robot.shootSubsystem);
+	requires(Robot.shootSubsystem);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
