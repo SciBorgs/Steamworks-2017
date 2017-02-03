@@ -25,6 +25,7 @@ public class SteadySpeedCommand extends Command {
     protected void execute() {
     	if(!OI.rightJoystick.getRawButton(1)) {
         	Robot.driveSubsystem.setTankSpeed(OI.rightJoystick.getY(), OI.rightJoystick.getY());
+        	Robot.driveSubsystem.setTankSpeed(OI.leftJoystick.getY(), OI.leftJoystick.getY());
     	}
     }
 

@@ -20,7 +20,7 @@ public class GyroTurnCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        initialAngle = Robot.gyro.getAngle();
+    //    initialAngle = Robot.gyro.getAngle();
 		SmartDashboard.putNumber("Initial Angle",  initialAngle);   
 		SmartDashboard.putNumber("Degrees To Turn",  degreesToTurn);
     }
@@ -34,10 +34,11 @@ public class GyroTurnCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(degreesToTurn > 0) {
-            return !(Robot.gyro.getAngle() < (degreesToTurn + initialAngle));		
+ //           return !(Robot.gyro.getAngle() < (degreesToTurn + initialAngle));		
     	}else {
-    		return !(Robot.gyro.getAngle() > (degreesToTurn + initialAngle)); 
+ //   		return !(Robot.gyro.getAngle() > (degreesToTurn + initialAngle)); 
     	}
+    	return true;
     }
 
     // Called once after isFinished returns true

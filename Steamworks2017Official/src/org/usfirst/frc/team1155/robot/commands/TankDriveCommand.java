@@ -13,21 +13,19 @@ public class TankDriveCommand extends Command {
 	
 	private DriveMode mode;
 	
-	public TankDriveCommand(DriveMode mode) {
-		requires(Robot.driveSubsystem);
-		
-		this.mode = mode;
+	public TankDriveCommand() {
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.driveSubsystem.setDriveMode(mode);
+		System.out.println("Tank Drive COmmand");
+		Robot.driveSubsystem.setDriveMode(DriveMode.TANK);
 		Robot.driveSubsystem.setTankSpeed(0, 0);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.driveSubsystem.setSpeed(OI.leftJoystick, OI.rightJoystick);
+		Robot.driveSubsystem.setSpeed(OI.rightJoystick, OI.leftJoystick);
 	}
 
 	@Override

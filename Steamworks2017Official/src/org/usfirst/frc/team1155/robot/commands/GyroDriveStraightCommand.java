@@ -22,21 +22,21 @@ public class GyroDriveStraightCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	targetAngle = Robot.gyro.getAngle();
+    //	targetAngle = Robot.gyro.getAngle();
     	Robot.driveSubsystem.setDriveMode(DriveMode.TANK);
     	Robot.driveSubsystem.setTankSpeed(speed, speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.gyro.getAngle() - targetAngle > ANGLE_BUFFER){ //rotating counter-clockwise
-    		Robot.driveSubsystem.setTankSpeed(speed + SPEED_CORRECTION, speed);
-    	}else if (targetAngle - Robot.gyro.getAngle() > ANGLE_BUFFER){ //rotating -clockwise 
-    		Robot.driveSubsystem.setTankSpeed(speed, speed + SPEED_CORRECTION);
-    	}
-    	else{
-        	Robot.driveSubsystem.setTankSpeed(speed, speed);
-    	}
+//    	if (Robot.gyro.getAngle() - targetAngle > ANGLE_BUFFER){ //rotating counter-clockwise
+//    		Robot.driveSubsystem.setTankSpeed(speed + SPEED_CORRECTION, speed);
+//    	}else if (targetAngle - Robot.gyro.getAngle() > ANGLE_BUFFER){ //rotating -clockwise 
+//    		Robot.driveSubsystem.setTankSpeed(speed, speed + SPEED_CORRECTION);
+//    	}
+//    	else{
+//        	Robot.driveSubsystem.setTankSpeed(speed, speed);
+//    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

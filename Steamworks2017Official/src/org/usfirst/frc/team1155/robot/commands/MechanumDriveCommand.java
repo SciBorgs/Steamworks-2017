@@ -12,15 +12,15 @@ public class MechanumDriveCommand extends Command {
 
 	private Joystick lateralMovement, rotationalMovement;
 	
-    public MechanumDriveCommand() {
-        requires(Robot.driveSubsystem);
-        
+    public MechanumDriveCommand() {        
         lateralMovement = OI.rightJoystick;
         rotationalMovement = OI.leftJoystick;
     }
 
     @Override
 	protected void initialize() {
+		System.out.println("Mech Drive COmmand");
+
     	Robot.driveSubsystem.setDriveMode(DriveMode.MECHANUM);
     	Robot.driveSubsystem.setMechSpeed(0, 0, 0);
     }

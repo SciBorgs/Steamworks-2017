@@ -21,7 +21,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public CANTalon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
-	public static DoubleSolenoid[] frontPivots, backPivots;
+	public static DoubleSolenoid[] pivots;
 		
 	public static DriveMode driveMode;
 	
@@ -32,21 +32,19 @@ public class DriveSubsystem extends Subsystem {
 		backLeftMotor = new CANTalon(PortMap.DRIVE_BACK_LEFT_TALON);
 		backRightMotor = new CANTalon(PortMap.DRIVE_BACK_RIGHT_TALON);
 
-//		frontPivots = new DoubleSolenoid[] {
-//				new DoubleSolenoid(PortMap.DRIVE_FRONT_LEFT_PISTON[0], PortMap.DRIVE_FRONT_LEFT_PISTON[1]), 
-//				new DoubleSolenoid(PortMap.DRIVE_FRONT_RIGHT_PISTON[0], PortMap.DRIVE_FRONT_RIGHT_PISTON[1])
-//		};
-//		
-//		backPivots = new DoubleSolenoid[] {
-//				new DoubleSolenoid(PortMap.DRIVE_BACK_LEFT_PISTON[0], PortMap.DRIVE_BACK_LEFT_PISTON[1]), 
-//				new DoubleSolenoid(PortMap.DRIVE_BACK_RIGHT_PISTON[0], PortMap.DRIVE_BACK_RIGHT_PISTON[1])
-//		};
-				
+		pivots = new DoubleSolenoid[] {
+				new DoubleSolenoid(0, PortMap.DRIVE_FRONT_LEFT_PISTON[0], PortMap.DRIVE_FRONT_LEFT_PISTON[1]), //front left
+				new DoubleSolenoid(0, PortMap.DRIVE_FRONT_RIGHT_PISTON[0], PortMap.DRIVE_FRONT_RIGHT_PISTON[1]), //front right
+				new DoubleSolenoid(0, PortMap.DRIVE_BACK_LEFT_PISTON[0], PortMap.DRIVE_BACK_LEFT_PISTON[1]),  //back left
+				new DoubleSolenoid(0, PortMap.DRIVE_BACK_RIGHT_PISTON[0], PortMap.DRIVE_BACK_RIGHT_PISTON[1]) //back right
+		};
+		
 		driveMode = DriveMode.TANK;
 	}
 	
 	//call this normally
-	public void setSpeed(Joystick rotationalJoy, Joystick lateralJoy) {
+	//lateralJoy is rightJoystick
+	public void setSpeed(Joystick lateralJoy, Joystick rotationalJoy) {
 		switch(driveMode) {
 		case TANK:
 			setTankSpeed(-rotationalJoy.getY(), -lateralJoy.getY()); 
@@ -72,6 +70,10 @@ public class DriveSubsystem extends Subsystem {
 	
 	//call this to force mechanum drive
 	public void setMechSpeed(double xVal, double yVal, double rotationalVal) {
+		xVal = -xVal;
+		//yVal = -yVal;
+		rotationalVal = -rotationalVal;
+		
 		frontLeftMotor.set(-xVal - yVal + rotationalVal);
 		frontRightMotor.set(-xVal + yVal + rotationalVal);
 		backLeftMotor.set(xVal - yVal + rotationalVal);
@@ -84,42 +86,25 @@ public class DriveSubsystem extends Subsystem {
 		
 		switch(mode) {
 		case MECHANUM:
-			engageFrontWheels(Value.kForward);
-			engageBackWheels(Value.kForward);
+			engageWheels(Value.kForward);
 			break;
 		case TANK:
-			engageFrontWheels(Value.kReverse);
-			engageBackWheels(Value.kReverse);
+			engageWheels(Value.kReverse);
 			break;
-		case TURN_BACK:
-			engageFrontWheels(Value.kReverse);
-			engageBackWheels(Value.kForward);
-			break;
-		case TURN_FRONT:
-			engageFrontWheels(Value.kForward);
-			engageBackWheels(Value.kReverse);
-			break;
-		}	
-		
+		}
 	}
 		
 	public DriveMode getDriveMode() {
 		return driveMode;
 	}
 	
-	public void engageFrontWheels(DoubleSolenoid.Value value) {
-//		for (DoubleSolenoid frontPivot: frontPivots) {
-//			frontPivot.set(value);
-//		}
-		SmartDashboard.putString("Front Wheels", value.name());
+	public void engageWheels(DoubleSolenoid.Value value) {
+		for (DoubleSolenoid pivot: pivots) {
+			pivot.set(value);
+		}
+		SmartDashboard.putString("Wheels", value.name());
 	}
 	
-	public void engageBackWheels(DoubleSolenoid.Value value) {
-//		for (DoubleSolenoid backPivot: backPivots) {
-//			backPivot.set(value);
-//		}
-		SmartDashboard.putString("Back Wheels", value.name());
-	}
 	
 	@Override
 	public void initDefaultCommand() {
