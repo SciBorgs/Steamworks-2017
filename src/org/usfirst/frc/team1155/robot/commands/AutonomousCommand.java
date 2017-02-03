@@ -26,17 +26,19 @@ public class AutonomousCommand extends CommandGroup {
         	 addSequential(new DistanceDriveCommand(
           			DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
           	addSequential(new RotateToPegCommand("right"));
+          	addSequential(new VisionAlignCommand());
           	addSequential(new DepositGearCommand());
           	break;
          case POSITION_3:
          	addSequential(new DistanceDriveCommand(
          			DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
          	addSequential(new RotateToPegCommand("left"));
+         	addSequential(new VisionAlignCommand());
          	addSequential(new DepositGearCommand());
          	break;
          case POSITION_2:
         	addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE));
-        	addSequential(new VisionCommand());
+        	addSequential(new VisionAlignCommand());
          	break;
          default:
          	break;
