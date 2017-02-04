@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+import org.usfirst.frc.team1155.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,7 +27,7 @@ public class VisionAlignCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	alignMode = true;
+    	// UNNEEDED alignMode = true;
     	Robot.gyro.reset();
     }
 
@@ -33,19 +35,15 @@ public class VisionAlignCommand extends Command {
     protected void execute() {
     	anglePOV = SmartDashboard.getNumber("Theta: ", INIT_ANGLE);
     	distToTape = SmartDashboard.getNumber("Distance: ", INIT_DISTANCE);
-    	
-    	if(alignMode){
-    		if(Math.abs(anglePOV) > ANGLE_BUFFER){
-    			//rotate first
-    			gyroTurnCommand = new GyroTurnCommand(ANGLE_BUFFER * (anglePOV/-Math.abs(anglePOV));
-    			gyroTurnCommand.start();
-    			//then go the distance necessary from the initial value 
-    			mechanumDriveCommand = new MechanumDriveCommand();
-    			mechanumDriveComma
+    
+		if(Math.abs(anglePOV) > ANGLE_BUFFER){
+			//rotate first
+			gyroTurnCommand = new GyroTurnCommand((Math.abs(anglePOV) - ANGLE_BUFFER) * (anglePOV/-Math.abs(anglePOV)));
+			gyroTurnCommand.start();
+			//then go the distance necessary from the initial value 
+			Robot.driveSubsystem.strafeDiagonal(90-anglePOV);
+		}
     			
-    		}
-    			
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
