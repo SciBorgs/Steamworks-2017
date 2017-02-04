@@ -68,6 +68,10 @@ public class DriveSubsystem extends Subsystem {
     	backLeftMotor.set(-x + y + rotation);
     	backRightMotor.set(x + y - rotation);
     }
+    
+    public void strafeDiagonal(double angle){
+    	
+    }
    
     public DriveMode getDriveMode() {
         return driveMode;

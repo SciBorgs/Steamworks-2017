@@ -23,7 +23,7 @@ public class AutonomousCommand extends CommandGroup {
     public AutonomousCommand(StartingPosition pos) {
     	 switch(pos){
          case POSITION_1: 
-        	 addSequential(new DistanceDriveCommand(
+        	addSequential(new DistanceDriveCommand(
           			DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
           	addSequential(new RotateToPegCommand("right"));
           	addSequential(new VisionAlignCommand());

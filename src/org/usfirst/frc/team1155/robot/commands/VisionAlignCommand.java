@@ -16,7 +16,8 @@ public class VisionAlignCommand extends Command {
 	private final double INIT_DISTANCE = 12; //inches; initial distance from the peg
 	private final double ANGLE_BUFFER = 5; //degrees
 	private boolean alignMode;	//rotate >> true; drive >> false
-	
+	Command gyroTurnCommand;
+	Command mechanumDriveCommand;
 	
     public VisionAlignCommand() {
         requires(Robot.driveSubsystem);
@@ -35,6 +36,12 @@ public class VisionAlignCommand extends Command {
     	
     	if(alignMode){
     		if(Math.abs(anglePOV) > ANGLE_BUFFER){
+    			//rotate first
+    			gyroTurnCommand = new GyroTurnCommand(ANGLE_BUFFER * (anglePOV/-Math.abs(anglePOV));
+    			gyroTurnCommand.start();
+    			//then go the distance necessary from the initial value 
+    			mechanumDriveCommand = new MechanumDriveCommand();
+    			mechanumDriveComma
     			
     		}
     			
