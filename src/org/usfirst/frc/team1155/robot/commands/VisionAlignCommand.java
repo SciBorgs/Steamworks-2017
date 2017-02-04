@@ -25,6 +25,7 @@ public class VisionAlignCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	alignMode = true;
+    	Robot.gyro.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,7 +34,10 @@ public class VisionAlignCommand extends Command {
     	distToTape = SmartDashboard.getNumber("Distance: ", INIT_DISTANCE);
     	
     	if(alignMode){
-    		if()
+    		if(Math.abs(anglePOV) > ANGLE_BUFFER){
+    			
+    		}
+    			
     	}
     }
 

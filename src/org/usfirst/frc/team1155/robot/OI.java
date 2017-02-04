@@ -23,13 +23,13 @@ public class OI extends Command{
 	
 	
 	public OI() { //change these buttons later
-//		tank = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_A);
-//		mech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_B);
-//		frontMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_X);
-//		backMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_Y);
-//		climb = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_LB);
-//		shoot = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RT);
-//		release = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RB);
+		tank = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_A);
+		mech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_B);
+		frontMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_X);
+		backMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_Y);
+		climb = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_LB);
+		shoot = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RT);
+		release = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RB);
 		
 		drive = new DriveCommand(DriveMode.MECHANUM);
 	}
