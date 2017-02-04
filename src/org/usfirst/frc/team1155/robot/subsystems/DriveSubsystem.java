@@ -70,7 +70,59 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void strafeDiagonal(double angle){
-    	
+    	double angleRad = (Math.PI/180) * angle;
+    	switch(angle){
+    	case (angle > 0 && angle <= 45):
+    		frontLeftMotor.set(1);
+    		frontRightMotor.set(Math.cos(angleRad));
+    		backLeftMotor.set(Math.cos(angleRad));
+    		backRightMotor.set(1);
+    		break;
+    	case (angle > 45 && angle <= 90):
+    		frontLeftMotor.set(1);
+			frontRightMotor.set(-Math.sin(angleRad));
+			backLeftMotor.set(-Math.sin(angleRad));
+			backRightMotor.set(1);
+			break;
+    	case (angle > 90 && angle <= 135):
+    		frontLeftMotor.set(Math.sin(angleRad));
+			frontRightMotor.set(-1);
+			backLeftMotor.set(-1);
+			backRightMotor.set(Math.sin(angleRad));
+			break;
+    	case (angle > 135 && angle <= 180):
+    		frontLeftMotor.set(-Math.cos(angleRad));
+			frontRightMotor.set(-1);
+			backLeftMotor.set(-1);
+			backRightMotor.set(-Math.cos(angleRad));
+			break;
+    	case (angle >= -45 && angle < 0):
+    		frontLeftMotor.set(Math.cos(angleRad));
+    		frontRightMotor.set(1);
+    		backLeftMotor.set(1);
+    		backRightMotor.set(Math.cos(angleRad));
+    		break;
+    	case (angle >= -90 && angle < -45):
+    		frontLeftMotor.set(-Math.sin(angleRad));
+    		frontRightMotor.set(1);
+    		backLeftMotor.set(1);
+    		backRightMotor.set(-Math.sin(angleRad));
+    		break;
+    	case (angle >= -135 && angle < -90):
+    		frontLeftMotor.set(-1);
+    		frontRightMotor.set(Math.sin(angleRad));
+    		backLeftMotor.set(Math.sin(angleRad));
+    		backRightMotor.set(-1);
+    		break;
+    	case (angle >= -180  && angle < -135):
+    		frontLeftMotor.set(-1);
+    		frontRightMotor.set(-Math.cos(angleRad));
+    		backLeftMotor.set(-Math.cos(angleRad));
+    		backRightMotor.set(-1);
+    		break;
+    	default:
+    		break;
+    	}
     }
    
     public DriveMode getDriveMode() {
