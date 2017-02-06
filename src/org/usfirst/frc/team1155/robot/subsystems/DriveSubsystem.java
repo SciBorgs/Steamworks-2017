@@ -70,54 +70,54 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void strafeDiagonal(double angle){
-    	double angleRad = (Math.PI/180) * angle;
+    	double thetaRad = (Math.PI/180) * angle;
     	switch(angle){
     	case (angle > 0 && angle <= 45):
     		frontLeftMotor.set(1);
-    		frontRightMotor.set(Math.cos(angleRad));
-    		backLeftMotor.set(Math.cos(angleRad));
+    		frontRightMotor.set(Math.cos(2*thetaRad));
+    		backLeftMotor.set(Math.cos(2*thetaRad));
     		backRightMotor.set(1);
     		break;
     	case (angle > 45 && angle <= 90):
     		frontLeftMotor.set(1);
-			frontRightMotor.set(-Math.sin(angleRad));
-			backLeftMotor.set(-Math.sin(angleRad));
+			frontRightMotor.set(-Math.sin(thetaRad));
+			backLeftMotor.set(-Math.sin(thetaRad));
 			backRightMotor.set(1);
 			break;
     	case (angle > 90 && angle <= 135):
-    		frontLeftMotor.set(Math.sin(angleRad));
+    		frontLeftMotor.set(Math.sin(2*(thetaRad % (Math.PI/2))));
 			frontRightMotor.set(-1);
 			backLeftMotor.set(-1);
-			backRightMotor.set(Math.sin(angleRad));
-			break;
+			backRightMotor.set(Math.sin(2*(thetaRad % (Math.PI/2))));
+			break;s
     	case (angle > 135 && angle <= 180):
-    		frontLeftMotor.set(-Math.cos(angleRad));
+    		frontLeftMotor.set(-Math.cos((thetaRad % (Math.PI/2))));
 			frontRightMotor.set(-1);
 			backLeftMotor.set(-1);
-			backRightMotor.set(-Math.cos(angleRad));
+			backRightMotor.set(-Math.cos(thetaRad));
 			break;
     	case (angle >= -45 && angle < 0):
-    		frontLeftMotor.set(Math.cos(angleRad));
+    		frontLeftMotor.set(Math.cos(thetaRad));
     		frontRightMotor.set(1);
     		backLeftMotor.set(1);
-    		backRightMotor.set(Math.cos(angleRad));
+    		backRightMotor.set(Math.cos(thetaRad));
     		break;
     	case (angle >= -90 && angle < -45):
-    		frontLeftMotor.set(-Math.sin(angleRad));
+    		frontLeftMotor.set(-Math.sin(thetaRad));
     		frontRightMotor.set(1);
     		backLeftMotor.set(1);
-    		backRightMotor.set(-Math.sin(angleRad));
+    		backRightMotor.set(-Math.sin(thetaRad));
     		break;
     	case (angle >= -135 && angle < -90):
     		frontLeftMotor.set(-1);
-    		frontRightMotor.set(Math.sin(angleRad));
-    		backLeftMotor.set(Math.sin(angleRad));
+    		frontRightMotor.set(Math.sin(thetaRad));
+    		backLeftMotor.set(Math.sin(thetaRad));
     		backRightMotor.set(-1);
     		break;
     	case (angle >= -180  && angle < -135):
     		frontLeftMotor.set(-1);
-    		frontRightMotor.set(-Math.cos(angleRad));
-    		backLeftMotor.set(-Math.cos(angleRad));
+    		frontRightMotor.set(-Math.cos(thetaRad));
+    		backLeftMotor.set(-Math.cos(thetaRad));
     		backRightMotor.set(-1);
     		break;
     	default:
