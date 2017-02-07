@@ -17,7 +17,6 @@ public class DistanceDriveCommand extends Command {
         distanceDriven = 0;
         //TODO set proper speed for going straight
         distanceToDrive = distance;
-        
     }
 
     // Called just before this Command runs the first time

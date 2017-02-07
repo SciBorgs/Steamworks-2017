@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousCommand extends CommandGroup {
 
 	//private boolean crossBorder = false;
-	private boolean shootBalls = false;
+	//private boolean shootBalls = false;
 	private final double DISTANCE_TO_BASELINE = 93.25; //inches
 	private final double DISTANCE_TO_PIVOT = 20.35; //inches
 	

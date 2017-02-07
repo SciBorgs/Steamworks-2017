@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveCommand extends Command{
-
-	
 	private DriveMode desiredMode;
 	
    	public DriveCommand(DriveMode mode) {
@@ -26,9 +24,6 @@ public class DriveCommand extends Command{
 	protected void execute() {
 		switch(Robot.driveSubsystem.getDriveMode()){
 			case MECHANUM:
-//				Robot.driveSubsystem.setMechSpeed(OI.gamepad.getX(GenericHID.Hand.kLeft),
-//												  OI.gamepad.getY(GenericHID.Hand.kLeft),
-//												  OI.gamepad.getX(GenericHID.Hand.kRight));
 				Robot.driveSubsystem.setMechSpeed(OI.gamepad.getX(GenericHID.Hand.kLeft),
 						  						  OI.gamepad.getY(GenericHID.Hand.kLeft),
 						  						  OI.gamepad.getX(GenericHID.Hand.kRight));

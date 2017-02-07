@@ -23,13 +23,13 @@ public class OI extends Command{
 	
 	
 	public OI() { //change these buttons later
-		tank = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_A);
+	    /*tank = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_A);
 		mech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_B);
 		frontMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_X);
 		backMech = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_Y);
 		climb = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_LB);
 		shoot = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RT);
-		release = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RB);
+		release = new JoystickButton(gamepad, PortMap.XBOX_CONTROLLER_RB);*/
 		
 		drive = new DriveCommand(DriveMode.MECHANUM);
 	}
@@ -39,13 +39,13 @@ public class OI extends Command{
 	}
 	
 	protected void execute(){
-//		tank.whenPressed(new DriveCommand(DriveMode.TANK));
-//		mech.whenPressed(new DriveCommand(DriveMode.MECHANUM));
-//		frontMech.whenPressed(new DriveCommand(DriveMode.TURN_FRONT));
-//		backMech.whenPressed(new DriveCommand(DriveMode.TURN_BACK));
-//		climb.whenPressed(new ClimbCommand());
-//		shoot.whenPressed(new ShootCommand());
-//		release.whenPressed(new ReleaseCommand());
+	    /*tank.whenPressed(new DriveCommand(DriveMode.TANK));
+		mech.whenPressed(new DriveCommand(DriveMode.MECHANUM));
+		frontMech.whenPressed(new DriveCommand(DriveMode.TURN_FRONT));
+		backMech.whenPressed(new DriveCommand(DriveMode.TURN_BACK));
+		climb.whenPressed(new ClimbCommand());
+		shoot.whenPressed(new ShootCommand());
+		release.whenPressed(new ReleaseCommand());*/
 	}
 
 	protected boolean isFinished() {

@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DepositGearCommand extends Command {
-		// Shows if the arms on the gear mechanism are open or closed
-    	boolean isClosed = true;  
+	// Shows if the arms on the gear mechanism are open or closed
+    boolean isClosed = true;
 	
     public DepositGearCommand() {
     	requires(Robot.gearSubsystem);

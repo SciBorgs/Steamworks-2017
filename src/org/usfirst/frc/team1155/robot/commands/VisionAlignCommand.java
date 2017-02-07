@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class VisionAlignCommand extends Command {
-	
 	private double distToTape;
 	private double anglePOV;
 	private final double MIN_PEG_DISTANCE = 1; //inches
