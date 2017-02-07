@@ -23,19 +23,19 @@ public class ShootCommand extends Command {
     }
 
     protected void initialize() {
-        Robot.shooterSubsystem.setServoPosition(getCorrectServoPosition());        
-        
-        if(shooterSide == ShooterSide.LEFT) {
-        	Robot.shooterSubsystem.setLeftShooter(1,1);
-        }else if(shooterSide == ShooterSide.RIGHT) {
-        	Robot.shooterSubsystem.setRightShooter(1,1);
-        }
+//        Robot.shooterSubsystem.setServoPosition(getCorrectServoPosition());        
+//        
+//        if(shooterSide == ShooterSide.LEFT) {
+//        	Robot.shooterSubsystem.setLeftShooter(1,1);
+//        }else if(shooterSide == ShooterSide.RIGHT) {
+//        	Robot.shooterSubsystem.setRightShooter(1,1);
+//        }
     }
     
-    private ServoPosition getCorrectServoPosition() {
-    	//logic goes here
-    	return ServoPosition.POSITION_1;
-    }
+//    private ServoPosition getCorrectServoPosition() {
+//    	//logic goes here
+//    	return ServoPosition.POSITION_1;
+//    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -49,11 +49,11 @@ public class ShootCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        if(shooterSide == ShooterSide.LEFT) {
-        	Robot.shooterSubsystem.setLeftShooter(0,0);
-        }else if(shooterSide == ShooterSide.RIGHT) {
-        	Robot.shooterSubsystem.setRightShooter(0,0);
-        }
+//        if(shooterSide == ShooterSide.LEFT) {
+//        	Robot.shooterSubsystem.setLeftShooter(0,0);
+//        }else if(shooterSide == ShooterSide.RIGHT) {
+//        	Robot.shooterSubsystem.setRightShooter(0,0);
+//        }
     }
 
     // Called when another command which requires one or more of the same

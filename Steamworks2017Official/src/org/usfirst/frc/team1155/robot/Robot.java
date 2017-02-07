@@ -4,35 +4,32 @@ package org.usfirst.frc.team1155.robot;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1155.robot.commands.MechanumDriveCommand;
-import org.usfirst.frc.team1155.robot.commands.ShootCommand;
-import org.usfirst.frc.team1155.robot.commands.SteadySpeedCommand;
 import org.usfirst.frc.team1155.robot.commands.TankDriveCommand;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team1155.robot.subsystems.GearSubsystem;
 import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
-import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem.ServoPosition;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveSubsystem driveSubsystem; 
 	public static ShooterSubsystem shooterSubsystem;
+	public static GearSubsystem gearSubsystem;
 	
 	public static OI oi = new OI();
-//	public static ADXRS450_Gyro gyro;
+	//public static ADXRS450_Gyro gyro;
 
 	@Override
 	public void robotInit() {
     	//gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 
 		driveSubsystem = new DriveSubsystem();
-		shooterSubsystem = new ShooterSubsystem();
+		gearSubsystem = new GearSubsystem();
+		//shooterSubsystem = new ShooterSubsystem();
 	}
 	
 	@Override
@@ -45,7 +42,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
-//    	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+    	//SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
 		Scheduler.getInstance().run();
 	}
 	

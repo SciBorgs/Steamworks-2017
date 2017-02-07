@@ -21,7 +21,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public CANTalon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
-	public static DoubleSolenoid[] pivots;
+	public static DoubleSolenoid frontPivots, backPivots;
 		
 	public static DriveMode driveMode;
 	
@@ -32,12 +32,8 @@ public class DriveSubsystem extends Subsystem {
 		backLeftMotor = new CANTalon(PortMap.DRIVE_BACK_LEFT_TALON);
 		backRightMotor = new CANTalon(PortMap.DRIVE_BACK_RIGHT_TALON);
 
-		pivots = new DoubleSolenoid[] {
-				new DoubleSolenoid(0, PortMap.DRIVE_FRONT_LEFT_PISTON[0], PortMap.DRIVE_FRONT_LEFT_PISTON[1]), //front left
-				new DoubleSolenoid(0, PortMap.DRIVE_FRONT_RIGHT_PISTON[0], PortMap.DRIVE_FRONT_RIGHT_PISTON[1]), //front right
-				new DoubleSolenoid(0, PortMap.DRIVE_BACK_LEFT_PISTON[0], PortMap.DRIVE_BACK_LEFT_PISTON[1]),  //back left
-				new DoubleSolenoid(0, PortMap.DRIVE_BACK_RIGHT_PISTON[0], PortMap.DRIVE_BACK_RIGHT_PISTON[1]) //back right
-		};
+		frontPivots = new DoubleSolenoid(PortMap.DRIVE_FRONT_PISTONS[0], PortMap.DRIVE_FRONT_PISTONS[1]);
+		backPivots = new DoubleSolenoid(PortMap.DRIVE_BACK_PISTONS[0], PortMap.DRIVE_BACK_PISTONS[1]);
 		
 		driveMode = DriveMode.TANK;
 	}
@@ -99,9 +95,8 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public void engageWheels(DoubleSolenoid.Value value) {
-		for (DoubleSolenoid pivot: pivots) {
-			pivot.set(value);
-		}
+		frontPivots.set(value);
+		backPivots.set(value);
 		SmartDashboard.putString("Wheels", value.name());
 	}
 	

@@ -33,11 +33,11 @@ public class GyroTurnCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(degreesToTurn > 0) {
- //           return !(Robot.gyro.getAngle() < (degreesToTurn + initialAngle));		
-    	}else {
- //   		return !(Robot.gyro.getAngle() > (degreesToTurn + initialAngle)); 
-    	}
+//    	if(degreesToTurn > 0) {
+//            return !(Robot.gyro.getAngle() < (degreesToTurn + initialAngle));		
+//    	}else {
+//    		return !(Robot.gyro.getAngle() > (degreesToTurn + initialAngle)); 
+//    	}
     	return true;
     }
 

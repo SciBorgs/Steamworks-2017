@@ -9,16 +9,18 @@ public class PortMap {
 	
 	//****************DRIVE*******************//
 	
-	public static final int DRIVE_FRONT_LEFT_TALON = 2;
+	public static final int DRIVE_FRONT_LEFT_TALON = 0;
 	public static final int DRIVE_FRONT_RIGHT_TALON = 1;
+	public static final int DRIVE_BACK_RIGHT_TALON = 2;
 	public static final int DRIVE_BACK_LEFT_TALON = 3;
-	public static final int DRIVE_BACK_RIGHT_TALON = 4;
 	
-	public static final int[] DRIVE_FRONT_LEFT_PISTON = {2,3};
-	public static final int[] DRIVE_FRONT_RIGHT_PISTON = {0,1};
-	public static final int[] DRIVE_BACK_LEFT_PISTON = {5,4};
-	public static final int[] DRIVE_BACK_RIGHT_PISTON = {6,7};
+	public static final int[] DRIVE_FRONT_PISTONS = {5,4};
+	public static final int[] DRIVE_BACK_PISTONS = {3,2};
+		
+	//****************GEAR*******************//
 	
+	public static final int[] GEAR_PISTONS = {0,1};
+
 	//****************SHOOT*******************//
 
 	public static final int RIGHT_SHOOT_TALON = 5;
