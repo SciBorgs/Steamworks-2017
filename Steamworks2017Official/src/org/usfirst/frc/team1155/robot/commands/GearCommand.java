@@ -29,11 +29,7 @@ public class GearCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(gearPosition == GearPosition.OPEN) {
-    		return !OI.rightJoystick.getRawButton(1);
-    	}else {
-    		return !OI.leftJoystick.getRawButton(1);
-    	}
+    	return (gearPosition == GearPosition.OPEN) ? !OI.rightJoystick.getRawButton(1) : !OI.leftJoystick.getRawButton(1);
     }
 
     // Called once after isFinished returns true
