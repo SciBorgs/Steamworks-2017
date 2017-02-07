@@ -16,9 +16,7 @@ public class ShootCommand extends Command {
 	
 	private ShooterSide shooterSide;
 
-    public ShootCommand(ShooterSide side) {
-    	requires(Robot.shooterSubsystem);
-    	
+    public ShootCommand(ShooterSide side) {    	
     	shooterSide = side;
     }
 

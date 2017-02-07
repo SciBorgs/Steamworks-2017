@@ -13,7 +13,7 @@ public class GearCommand extends Command {
 
 	private GearPosition gearPosition;
 	
-    public GearCommand(GearPosition position) {    	
+    public GearCommand(GearPosition position) {  
     	gearPosition = position;
     }
 

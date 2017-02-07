@@ -20,7 +20,8 @@ public class Robot extends IterativeRobot {
 	public static ShooterSubsystem shooterSubsystem;
 	public static GearSubsystem gearSubsystem;
 	
-	public static OI oi = new OI();
+	public static OI oi;
+	
 	//public static ADXRS450_Gyro gyro;
 
 	@Override
@@ -30,6 +31,8 @@ public class Robot extends IterativeRobot {
 		driveSubsystem = new DriveSubsystem();
 		gearSubsystem = new GearSubsystem();
 		//shooterSubsystem = new ShooterSubsystem();
+		
+		oi = new OI();
 	}
 	
 	@Override

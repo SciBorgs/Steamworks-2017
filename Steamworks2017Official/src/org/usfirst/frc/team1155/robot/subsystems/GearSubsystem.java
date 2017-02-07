@@ -19,7 +19,6 @@ public class GearSubsystem extends Subsystem {
 	
 	public GearSubsystem() {
 		gearPistons = new DoubleSolenoid(0, PortMap.GEAR_PISTONS[0], PortMap.GEAR_PISTONS[1]);
-		
 		gearPistons.set(DoubleSolenoid.Value.kForward);
 	}
 	
