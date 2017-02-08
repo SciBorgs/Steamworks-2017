@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1155.robot.commands;
 
+import org.usfirst.frc.team1155.robot.Robot;
+
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team1155.robot.Robot;
-import org.usfirst.frc.team1155.robot.subsystems.ClimbSubsystem;
 
 /**
  *
