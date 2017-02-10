@@ -31,6 +31,8 @@ public class PortMap {
 	public static final int XBOX_CONTROLLER_START = 10;
 
 	// public static final int SHOOTER_SERVO = 15;
+	public static final int AGITATOR_SERVO_ONE = 90;
+	public static final int AGITATOR_SERVO_TWO = 99;
 	//
 	// public static final int CLIMB_TALON = 21;
 	// public static final int CLIMB_SOURCE1 = 42;

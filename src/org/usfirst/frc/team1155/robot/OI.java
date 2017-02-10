@@ -41,6 +41,7 @@ public class OI extends Command {
 	protected void execute() {
 		/*
 		 * tank.whenPressed(new DriveCommand(DriveMode.TANK));
+		 * new AgitateCommand();
 		 * mech.whenPressed(new DriveCommand(DriveMode.MECHANUM));
 		 * frontMech.whenPressed(new DriveCommand(DriveMode.TURN_FRONT));
 		 * backMech.whenPressed(new DriveCommand(DriveMode.TURN_BACK));
