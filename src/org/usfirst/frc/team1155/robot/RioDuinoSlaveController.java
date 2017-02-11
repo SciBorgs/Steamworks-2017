@@ -14,16 +14,19 @@ public class RioDuinoSlaveController {
 	public void SendStateChange(char state)
 	{
 		i2cBus.write(0x02, state);
+		//causes color to update
 	}
 	
 	public void SendString(String writeStr)
 	{
-		char[] CharArray = writeStr.toCharArray();
-		byte[] WriteData = new byte[CharArray.length];
+		char[] CharArray = writeStr.toCharArray(); 
+		//you can't use strings as they are too big too pass through, so convert into chars
+		byte[] WriteData = new byte[CharArray.length]; 
+		//you can't use chars as they are too big too pass through, so convert into bytes
 		for (int i = 0; i < CharArray.length; i++) {
 			WriteData[i] = (byte) CharArray[i];
-		}
+		} //convert chars into bytes
 		i2cBus.transaction(WriteData, WriteData.length, null, 0);
-
+		//sends it to RioDuino
 	}
 }
