@@ -24,7 +24,7 @@ public class DriveCommand extends Command {
 	@Override
 	protected void initialize() {
 		Robot.driveSubsystem.setDriveMode(desiredMode);
-		//IGNORE UGLINESS PLEASE FIX IF POSSIBLE - Karun
+		// IGNORE UGLINESS PLEASE FIX IF POSSIBLE - Karun
 		allianceColor = DriverStation.getInstance().getAlliance();
 		if (allianceColor == DriverStation.Alliance.Blue) {
 			if (Robot.driveSubsystem.getDriveMode() == DriveMode.MECHANUM) {
@@ -101,7 +101,23 @@ public class DriveCommand extends Command {
 
 	@Override
 	protected void end() {
-
+		if (Robot.status.equals("teleop")) {
+			if (allianceColor == DriverStation.Alliance.Blue) {
+				rioDuinoDrive = "teleopInitBlue";
+				rioDuino.SendString(rioDuinoDrive);
+			} else {
+				rioDuinoDrive = "teleopInitRed";
+				rioDuino.SendString(rioDuinoDrive);
+			}
+		} else {
+			if (allianceColor == DriverStation.Alliance.Blue) {
+				rioDuinoDrive = "autoInitBlue";
+				rioDuino.SendString(rioDuinoDrive);
+			} else {
+				rioDuinoDrive = "autoInitRed";
+				rioDuino.SendString(rioDuinoDrive);
+			}
+		}
 	}
 
 	@Override

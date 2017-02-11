@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.DriverStation;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -34,7 +33,7 @@ public class Robot extends IterativeRobot {
 	DriverStation.Alliance allianceColor;
 	String rioDuinoLEDMode;
 	boolean normalState;
-	
+	public static String status;
 	Command autonomousCommand;
 	NetworkTable table;
 
@@ -61,6 +60,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		status = "disabled";
 		Scheduler.getInstance().run();
 	}
 
@@ -71,13 +71,15 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.start();
 		allianceColor = DriverStation.getInstance().getAlliance();
 
-    	System.out.println("in autonomousInit(), station #" + teamLocation);
+		System.out.println("in autonomousInit(), station #" + teamLocation);
 
-    	if (allianceColor == DriverStation.Alliance.Blue)
-    		rioDuinoLEDMode = "autoInitBlue";
-    	else
-    		rioDuinoLEDMode = "autoInitRed";
-    	rioDuino.SendString(rioDuinoLEDMode);
+		if (allianceColor == DriverStation.Alliance.Blue) {
+			rioDuinoLEDMode = "autoInitBlue";
+			rioDuino.SendString(rioDuinoLEDMode);
+		} else {
+			rioDuinoLEDMode = "autoInitRed";
+			rioDuino.SendString(rioDuinoLEDMode);
+		}
 	}
 
 	/**
@@ -85,6 +87,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		status = "autonomous";
 		Scheduler.getInstance().run();
 	}
 
@@ -98,12 +101,13 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		oi = new OI();
 		oi.start();
-		
-		if (allianceColor == DriverStation.Alliance.Blue)
-    		rioDuinoLEDMode = "teleopInitBlue";
-    	else
-    		rioDuinoLEDMode = "teleopInitRed";
-    	rioDuino.SendString(rioDuinoLEDMode);
+
+		if (allianceColor == DriverStation.Alliance.Blue) {
+			rioDuinoLEDMode = "teleopInitBlue";
+		} else {
+			rioDuinoLEDMode = "teleopInitRed";
+			rioDuino.SendString(rioDuinoLEDMode);
+		}
 	}
 
 	/**
@@ -112,7 +116,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-    	rioDuinoLEDMode = "disabledInit";
+		rioDuinoLEDMode = "disabledInit";
 		rioDuino.SendString(rioDuinoLEDMode);
 	}
 
@@ -121,19 +125,21 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		status = "teleop";
 		Scheduler.getInstance().run();
 	}
 
-	  public void testInit() {
-	    	rioDuinoLEDMode = "testInit";
-			rioDuino.SendString(rioDuinoLEDMode);
-	    }
-	
+	public void testInit() {
+		rioDuinoLEDMode = "testInit";
+		rioDuino.SendString(rioDuinoLEDMode);
+	}
+
 	/**
 	 * This function is called periodically during test mode
 	 */
 	@Override
 	public void testPeriodic() {
+		status = "test";
 		LiveWindow.run();
 	}
 }
