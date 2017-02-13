@@ -1,5 +1,10 @@
 package org.usfirst.frc.team1155.robot.subsystems;
 
+import org.usfirst.frc.team1155.robot.PortMap;
+
+import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -11,16 +16,16 @@ public class ShooterSubsystem extends Subsystem {
 	// CLOSED_STATE,
 	// OPEN_STATE;
 	// }
-	// public CANTalon shooterTalon;
-	// public Servo shooterServo;
+	public CANTalon shooterTalon;
+	public Servo shooterServo, agitatorServo1, agitatorServo2;
 
 	private double servoToggleSpeed = 0.5;
 
 	public ShooterSubsystem() {
-		// shooterTalon = new CANTalon(PortMap.SHOOTER_TALON);
-		// shooterServo = new Servo(PortMap.SHOOTER_SERVO);
-		// agitatorServo1 = new Servo(PortMap.AGITATOR_SERVO_ONE);
-		// agitatorServo2 = new Servo(PortMap.AGITATOR_SERVO_TWO);
+		shooterTalon = new CANTalon(PortMap.SHOOTER_TALON);
+		shooterServo = new Servo(PortMap.SHOOTER_SERVO);
+		agitatorServo1 = new Servo(PortMap.AGITATOR_SERVO_ONE);
+		agitatorServo2 = new Servo(PortMap.AGITATOR_SERVO_TWO);
 	}
 
 	public void setWheelSpeed(double speed) {
@@ -41,7 +46,7 @@ public class ShooterSubsystem extends Subsystem {
 		agitatorServo2.set(position);
 	}
 	
-	public int getAgitatorServo(){
+	public double getAgitatorServo(){
 			return agitatorServo1.get();
 	}
 
