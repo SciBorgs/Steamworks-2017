@@ -1,8 +1,5 @@
 package org.usfirst.frc.team1155.robot.commands;
-import org.usfirst.frc.team1155.robot.OI;
-import org.usfirst.frc.team1155.robot.PortMap;
 import org.usfirst.frc.team1155.robot.Robot;
-import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
