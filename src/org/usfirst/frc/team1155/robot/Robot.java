@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +29,11 @@ public class Robot extends IterativeRobot {
 	public static ShooterSubsystem shootSubsystem;
 	public static OI oi;
 	public static ADXRS450_Gyro gyro;
-
+	RioDuinoSlaveController rioDuino;
+	DriverStation.Alliance allianceColor;
+	String rioDuinoLEDMode;
+	boolean normalState;
+	public static String status;
 	Command autonomousCommand;
 	NetworkTable table;
 
@@ -47,11 +52,15 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
 		// autonomousCommand = new ExampleCommand();
 		table = NetworkTable.getTable("datatable");
-
+		rioDuino = new RioDuinoSlaveController();
+		rioDuinoLEDMode = "disabledInit";
+		rioDuino.SendString(rioDuinoLEDMode);
+		normalState = true;
 	}
 
 	@Override
 	public void disabledPeriodic() {
+		status = "disabled";
 		Scheduler.getInstance().run();
 	}
 
@@ -60,6 +69,17 @@ public class Robot extends IterativeRobot {
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
+		allianceColor = DriverStation.getInstance().getAlliance();
+
+		System.out.println("in autonomousInit(), station #" + teamLocation);
+
+		if (allianceColor == DriverStation.Alliance.Blue) {
+			rioDuinoLEDMode = "autoInitBlue";
+			rioDuino.SendString(rioDuinoLEDMode);
+		} else {
+			rioDuinoLEDMode = "autoInitRed";
+			rioDuino.SendString(rioDuinoLEDMode);
+		}
 	}
 
 	/**
@@ -67,6 +87,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		status = "autonomous";
 		Scheduler.getInstance().run();
 	}
 
@@ -80,6 +101,13 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		oi = new OI();
 		oi.start();
+
+		if (allianceColor == DriverStation.Alliance.Blue) {
+			rioDuinoLEDMode = "teleopInitBlue";
+		} else {
+			rioDuinoLEDMode = "teleopInitRed";
+			rioDuino.SendString(rioDuinoLEDMode);
+		}
 	}
 
 	/**
@@ -88,7 +116,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		rioDuinoLEDMode = "disabledInit";
+		rioDuino.SendString(rioDuinoLEDMode);
 	}
 
 	/**
@@ -96,7 +125,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		status = "teleop";
 		Scheduler.getInstance().run();
+	}
+
+	public void testInit() {
+		rioDuinoLEDMode = "testInit";
+		rioDuino.SendString(rioDuinoLEDMode);
 	}
 
 	/**
@@ -104,6 +139,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		status = "test";
 		LiveWindow.run();
 	}
 }
