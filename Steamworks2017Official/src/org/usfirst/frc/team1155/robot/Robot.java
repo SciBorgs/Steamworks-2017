@@ -105,7 +105,7 @@ public class Robot extends IterativeRobot {
 		}
 		
 		if(rioDuino != null)
-			rioDuino.SendString("red");
+			rioDuino.SendString("disableInit");
 		
 		if(gyro != null) 
 			gyro.reset();

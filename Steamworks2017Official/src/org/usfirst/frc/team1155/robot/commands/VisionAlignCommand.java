@@ -15,7 +15,7 @@ public class VisionAlignCommand extends Command {
 	private double visionAngle;
 	
 	private final double MIN_PEG_DISTANCE = 1; //inches
-	private final double MIN_ANGLE = 5; //degrees
+	private final double MIN_ANGLE = 2; //degrees
 	
 	private boolean finishedRotating;
 	
@@ -35,6 +35,7 @@ public class VisionAlignCommand extends Command {
 
         	if(Math.abs(visionAngle) > MIN_ANGLE){
     			new GyroTurnCommand(visionAngle).start();
+    			finishedRotating = true;
     		} 
     	}catch(Exception e) {
     		System.out.println("Vision not working properly during init");
@@ -49,10 +50,11 @@ public class VisionAlignCommand extends Command {
         	visionAngle = SmartDashboard.getNumber("Theta: ");
         	visionDistance = SmartDashboard.getNumber("Distance: ");
 
-        	if((Math.abs(visionAngle) < MIN_ANGLE) && !finishedRotating) {
-        		new DistanceDriveCommand(visionDistance).start();
+        	if((Math.abs(visionAngle) > MIN_ANGLE) && !finishedRotating) {
+    			new GyroTurnCommand(visionAngle).start();
         		finishedRotating = true;
         	}
+        	 
     	}catch(Exception e) {
     		System.out.println("Vision not working properly during execute");
     	}	
@@ -62,13 +64,13 @@ public class VisionAlignCommand extends Command {
     //Check to see whether it is both within angle buffer from tape and
     //within the distance
     protected boolean isFinished() {
-    	System.out.println("Finished vision align");
         return (visionDistance <= MIN_PEG_DISTANCE) && (Math.abs(visionAngle) < MIN_ANGLE);
         
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("finished vision align");
     }
 
     // Called when another command which requires one or more of the same

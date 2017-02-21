@@ -13,13 +13,16 @@ public class GyroTurnCommand extends Command {
 
 	private double initialAngle, degreesToTurn;
 	
-	
+	boolean sketch; 
     public GyroTurnCommand(double degrees) {
     	degreesToTurn = degrees;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	sketch = false;
+    	System.out.println("turning " + degreesToTurn);
+
     	initialAngle = Robot.gyro.getAngle();
 
     	Robot.driveSubsystem.sensorMode = SensorMode.GYRO;
@@ -38,10 +41,14 @@ public class GyroTurnCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		return (Robot.driveSubsystem.getPIDController().getAvgError() < 0);
+    	//System.out.println(Robot.driveSubsystem.getPIDController().getAvgError());
+    	double avg = Robot.driveSubsystem.getPIDController().getError();
+    	
+    	
+		return Math.abs(avg) < 1;// && sketch;//(Robot.driveSubsystem.getPIDController().getAvgError() < 0);
     }
 
-    // Called once after isFinished returns true
+    // Called once after isFi nished returns true
     protected void end() {
     	System.out.println("FInished gyro");
     	Robot.driveSubsystem.setTankSpeed(0, 0);
