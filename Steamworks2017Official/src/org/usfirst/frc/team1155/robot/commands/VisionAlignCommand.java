@@ -11,42 +11,60 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class VisionAlignCommand extends Command {
 	
-	private double distToTape;
-	private double anglePOV;
+	private double visionDistance;
+	private double visionAngle;
+	
 	private final double MIN_PEG_DISTANCE = 1; //inches
-	private final double INIT_ANGLE = 60; //degrees; initial angle of the gyro
-	private final double INIT_DISTANCE = 12; //inches; initial distance from the peg
-	private final double ANGLE_BUFFER = 5; //degrees
-	private boolean alignMode;	//rotate >> true; drive >> false
+	private final double MIN_ANGLE = 5; //degrees
+	
+	private boolean finishedRotating;
 	
     public VisionAlignCommand() {
         requires(Robot.driveSubsystem);
+        
+        finishedRotating = false;
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    	// UNNEEDED alignMode = true;
+    @SuppressWarnings("deprecation")
+	protected void initialize() {
     	Robot.gyro.reset();
+    	
+    	try {
+        	visionAngle = SmartDashboard.getNumber("Theta: ");
+
+        	if(Math.abs(visionAngle) > MIN_ANGLE){
+    			new GyroTurnCommand(visionAngle).start();
+    		} 
+    	}catch(Exception e) {
+    		System.out.println("Vision not working properly during init");
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	anglePOV = SmartDashboard.getNumber("Theta: ", INIT_ANGLE);
-    	distToTape = SmartDashboard.getNumber("Distance: ", INIT_DISTANCE);
-    
-		if(Math.abs(anglePOV) > ANGLE_BUFFER){
-			//rotate first
-			new GyroTurnCommand((Math.abs(anglePOV) - ANGLE_BUFFER) * (anglePOV/-Math.abs(anglePOV))).start();
-			Robot.driveSubsystem.moveDegrees(90-anglePOV);
-		}
-    			
+    @SuppressWarnings("deprecation")
+	protected void execute() {
+    	
+    	try {
+        	visionAngle = SmartDashboard.getNumber("Theta: ");
+        	visionDistance = SmartDashboard.getNumber("Distance: ");
+
+        	if((Math.abs(visionAngle) < MIN_ANGLE) && !finishedRotating) {
+        		new DistanceDriveCommand(visionDistance).start();
+        		finishedRotating = true;
+        	}
+    	}catch(Exception e) {
+    		System.out.println("Vision not working properly during execute");
+    	}	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     //Check to see whether it is both within angle buffer from tape and
     //within the distance
     protected boolean isFinished() {
-        return distToTape <= MIN_PEG_DISTANCE && (anglePOV > -ANGLE_BUFFER && anglePOV < ANGLE_BUFFER);
+    	System.out.println("Finished vision align");
+        return (visionDistance <= MIN_PEG_DISTANCE) && (Math.abs(visionAngle) < MIN_ANGLE);
+        
     }
 
     // Called once after isFinished returns true

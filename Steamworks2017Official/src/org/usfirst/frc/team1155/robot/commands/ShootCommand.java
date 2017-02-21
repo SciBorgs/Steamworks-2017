@@ -31,7 +31,7 @@ public class ShootCommand extends Command {
         }else if(shooterSide == ShooterSide.RIGHT) {
         	Robot.shooterSubsystem.setRightShooter(0.8, 1);
         }
-        
+        Robot.rioDuino.SendString("shooting");
         //Robot.rioDuino.SendString("yellow");
     }
 
@@ -47,27 +47,27 @@ public class ShootCommand extends Command {
     // Called once after isFinished returns true
     protected void end() {
         if(shooterSide == ShooterSide.LEFT) {
-        	Robot.shooterSubsystem.setLeftShooter(0, 0);
+        	Robot.shooterSubsystem.leftShootTalon.set(0);
         }else if(shooterSide == ShooterSide.RIGHT) {
-        	Robot.shooterSubsystem.setRightShooter(0, 0);
+        	Robot.shooterSubsystem.rightShootTalon.set(0);
         }
         
         Robot.shooterSubsystem.stopAgitators();
         
         //LED Stuff
-//    	if(Robot.driveSubsystem.getDriveMode() == DriveMode.MECHANUM) {
-//    		if (Robot.allianceColor == DriverStation.Alliance.Blue) {
-//    			Robot.rioDuino.SendString("mechBlue");
-//        	} else {
-//    			Robot.rioDuino.SendString("mechRed");
-//        	}
-//    	}else {
-//    		if (Robot.allianceColor == DriverStation.Alliance.Blue) {
-//    			Robot.rioDuino.SendString("tankBlue");
-//        	} else {
-//    			Robot.rioDuino.SendString("tankRed");
-//        	}
-//    	}
+    	if(Robot.driveSubsystem.getDriveMode() == DriveMode.MECHANUM) {
+    		if (Robot.allianceColor == DriverStation.Alliance.Blue) {
+    			Robot.rioDuino.SendString("mechBlue");
+        	} else {
+    			Robot.rioDuino.SendString("mechRed");
+        	}
+    	}else {
+    		if (Robot.allianceColor == DriverStation.Alliance.Blue) {
+    			Robot.rioDuino.SendString("tankBlue");
+        	} else {
+    			Robot.rioDuino.SendString("tankRed");
+        	}
+    	}
     }
 
     // Called when another command which requires one or more of the same

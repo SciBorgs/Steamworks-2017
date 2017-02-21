@@ -11,13 +11,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem extends PIDSubsystem {
 
 	public enum DriveMode {
 		MECHANUM, TANK, TURN_FRONT, TURN_BACK;
+	}
+	
+	public enum SensorMode {
+		ENCODER, GYRO;
 	}
 
 	public CANTalon frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
@@ -27,8 +32,11 @@ public class DriveSubsystem extends Subsystem {
 	public static final int WHEEL_RADIUS = 2;
 	
 	public boolean angleDrive = false;
+	
+	public SensorMode sensorMode;
 
 	public DriveSubsystem() {
+		super("Drive", 0.1, 0, 0.1);
 
 		frontLeftMotor = new CANTalon(PortMap.DRIVE_FRONT_LEFT_TALON);
 		frontRightMotor = new CANTalon(PortMap.DRIVE_FRONT_RIGHT_TALON);
@@ -37,8 +45,13 @@ public class DriveSubsystem extends Subsystem {
 
 		frontPivots = new DoubleSolenoid(PortMap.DRIVE_RIGHT_PISTONS[0], PortMap.DRIVE_RIGHT_PISTONS[1]);
 		backPivots = new DoubleSolenoid(PortMap.DRIVE_LEFT_PISTONS[0], PortMap.DRIVE_LEFT_PISTONS[1]);
-
+		
 		driveMode = DriveMode.TANK;
+		
+    	resetEncoders();
+
+		getPIDController().setContinuous(true);
+		getPIDController().setPercentTolerance(20.0);
 	}
 
 	// call this normally
@@ -130,17 +143,59 @@ public class DriveSubsystem extends Subsystem {
 	
     public void resetEncoders(){
     	frontLeftMotor.setEncPosition(0);
-    	backLeftMotor.setEncPosition(0);
     	frontRightMotor.setEncPosition(0);
-    	backRightMotor.setEncPosition(0);
     }
     
     public double getEncDistance(){
-    	return (frontRightMotor.getEncPosition()/1023.0) * (Math.PI * 2 * WHEEL_RADIUS);
+    	return frontRightMotor.getEncPosition() * (1/44.2);
     }
 
 	@Override
 	public void initDefaultCommand() {
 
 	}
+
+	public void startAdjustment(double current, double setPoint) {
+		// Enables PIDController with given setpoint.
+		setPoint %= 360;
+		// Sets angle to corresponding reference angle.
+		setSetpoint((int) (((current - setPoint >= 0 ? 180 : -180) + current - setPoint) / 360) * 360 + setPoint);
+		// Rounds difference of current and desired angle to nearest 360
+		// degrees, then adds the desired angle to make final set point.
+		enable();
+	}
+
+	public void endAdjustment() {
+		// Disable PID Controller
+		getPIDController().disable();
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		// Returns input to be used by the PIDController
+		if (sensorMode == SensorMode.GYRO)
+			return Robot.gyro.getAngle();
+		return getEncDistance();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// Set wheels to values given by PIDController
+		
+		if(sensorMode == SensorMode.GYRO) {
+			output *= 0.5;
+			frontLeftMotor.pidWrite(-output);
+			backLeftMotor.pidWrite(-output);
+			frontRightMotor.pidWrite(-output);
+			backRightMotor.pidWrite(-output);
+		}else {
+			output *= -0.4;
+			frontLeftMotor.pidWrite(output);
+			backLeftMotor.pidWrite(output);
+			frontRightMotor.pidWrite(-output);
+			backRightMotor.pidWrite(-output);
+		}
+
+	}
+
 }

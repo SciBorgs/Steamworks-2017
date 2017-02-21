@@ -15,7 +15,7 @@ public class ClimbCommand extends Command {
     protected void initialize() {
     	Robot.climberSubsystem.startClimb();
     	
-    	Robot.rioDuino.SendString("blue");
+    	Robot.rioDuino.SendString("climbing");
     }
 
     // Called repeatedly when this Command is scheduled to run

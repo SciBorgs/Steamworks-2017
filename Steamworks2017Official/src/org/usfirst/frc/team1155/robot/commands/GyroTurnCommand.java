@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Robot;
+import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem.SensorMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,7 +13,6 @@ public class GyroTurnCommand extends Command {
 
 	private double initialAngle, degreesToTurn;
 	
-	private final double TURN_SPEED = 0.75;
 	
     public GyroTurnCommand(double degrees) {
     	degreesToTurn = degrees;
@@ -21,33 +21,36 @@ public class GyroTurnCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	initialAngle = Robot.gyro.getAngle();
-		SmartDashboard.putNumber("Initial Angle",  initialAngle);   
-		SmartDashboard.putNumber("Degrees To Turn",  degreesToTurn);
+
+    	Robot.driveSubsystem.sensorMode = SensorMode.GYRO;
+    	
+    	Robot.driveSubsystem.startAdjustment(initialAngle, initialAngle + degreesToTurn);
+		// Sets PID of the PID controller to the values given on the SmartDashboard
+		Robot.driveSubsystem.getPIDController().setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D"));
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		SmartDashboard.putNumber("turn to ",  Math.abs(degreesToTurn + initialAngle));
-    	Robot.driveSubsystem.setMechSpeed(0, 0, TURN_SPEED * (degreesToTurn/Math.abs(degreesToTurn)));
+
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(degreesToTurn > 0) {
-            return !(Robot.gyro.getAngle() < (degreesToTurn + initialAngle));		
-    	}else {
-    		return !(Robot.gyro.getAngle() > (degreesToTurn + initialAngle)); 
-    	}
+		return (Robot.driveSubsystem.getPIDController().getAvgError() < 0);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("FINISHED");
-    	Robot.driveSubsystem.setMechSpeed(0, 0, 0);
+    	System.out.println("FInished gyro");
+    	Robot.driveSubsystem.setTankSpeed(0, 0);
+    	Robot.driveSubsystem.endAdjustment();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	
     }
 }

@@ -25,11 +25,11 @@ public class MechanumDriveCommand extends Command {
     	Robot.driveSubsystem.setDriveMode(DriveMode.MECHANUM);
     	Robot.driveSubsystem.setMechSpeed(0, 0, 0);
     	
-//		if (Robot.allianceColor == DriverStation.Alliance.Blue) {
-//			Robot.rioDuino.SendString("mechBlue");
-//    	} else {
-//			Robot.rioDuino.SendString("mechRed");
-//    	}
+		if (Robot.allianceColor == DriverStation.Alliance.Blue) {
+			Robot.rioDuino.SendString("mechBlue");
+    	} else {
+			Robot.rioDuino.SendString("mechRed");
+    	}
     }
 
     @Override

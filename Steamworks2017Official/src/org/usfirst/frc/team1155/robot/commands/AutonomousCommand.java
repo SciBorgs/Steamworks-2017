@@ -16,30 +16,31 @@ public class AutonomousCommand extends CommandGroup {
 	private final double DISTANCE_TO_PIVOT = 20.35; // inches
 
 	public enum StartingPosition {
-		POSITION_1, // left driver station
-		POSITION_2, // middle driver station
-		POSITION_3; // right driver station
+		POSITION_LEFT, // left driver station
+		POSITION_MIDDLE, // middle driver station
+		POSITION_RIGHT; // right driver station
 	}
 
 	// possible order of auto commands
 	public AutonomousCommand(StartingPosition pos) {
 		Robot.driveSubsystem.setDriveMode(DriveMode.MECHANUM);
 		switch (pos) {
-		case POSITION_1:
+		case POSITION_LEFT:
 			addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
 			addSequential(new GyroTurnCommand(60));
-			addSequential(new VisionAlignCommand());
-			addSequential(new DepositGearCommand());
+//			addSequential(new VisionAlignCommand());
+//			addSequential(new DepositGearCommand());
 			break;
-		case POSITION_3:
+		case POSITION_RIGHT:
 			addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
 			addSequential(new GyroTurnCommand(-60));
 			addSequential(new VisionAlignCommand());
 			addSequential(new DepositGearCommand());
 			break;
-		case POSITION_2:
+		case POSITION_MIDDLE:
 			addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE));
 			addSequential(new VisionAlignCommand());
+			addSequential(new DepositGearCommand());
 			break;
 		default:
 			break;

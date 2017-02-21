@@ -23,9 +23,7 @@ public class GearCommand extends Command {
     protected void initialize() {    	
     	Robot.gearSubsystem.setGearPosition(gearPosition);
     	
-    	if(gearPosition == GearPosition.OPEN) {
-	//		Robot.rioDuino.SendString("depositingGear");
-    	}
+ 		//Robot.rioDuino.SendString("depositingGear");
     }
 
     // Called repeatedly when this Command is scheduled to run

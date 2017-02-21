@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1155.robot.commands.AutonomousCommand;
 import org.usfirst.frc.team1155.robot.commands.TankDriveCommand;
 import org.usfirst.frc.team1155.robot.commands.AutonomousCommand.StartingPosition;
+import org.usfirst.frc.team1155.robot.commands.DistanceDriveCommand;
+import org.usfirst.frc.team1155.robot.commands.GyroTurnCommand;
 import org.usfirst.frc.team1155.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1155.robot.subsystems.GearSubsystem;
@@ -31,8 +33,8 @@ public class Robot extends IterativeRobot {
 	public static ADXRS450_Gyro gyro;
 	
 	public static RioDuinoController rioDuino;
-//	public static DriverStation.Alliance allianceColor;
-//	String rioDuinoLEDMode;
+	public static DriverStation.Alliance allianceColor;
+	String rioDuinoLEDMode;
 	
 
 	@Override
@@ -52,16 +54,19 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		gyro.reset();
+		driveSubsystem.resetEncoders();
+		driveSubsystem.endAdjustment();
+		
 		rioDuino.SendString("green");
 
 		new TankDriveCommand().start(); 
-		new Compressor(0).start();
+	//	new Compressor(0).start();
 	}
 
 	@Override
 	public void teleopPeriodic() {
     	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
-    	
+
     	//testing servos
     	Robot.shooterSubsystem.leftShootServo.set(-OI.leftJoystick.getThrottle());
     	Robot.shooterSubsystem.rightShootServo.set(1+OI.leftJoystick.getThrottle());
@@ -71,29 +76,30 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
+		new AutonomousCommand(StartingPosition.POSITION_LEFT).start();
 		
-		//LED Stuff
+		allianceColor = DriverStation.getInstance().getAlliance();
+		if (allianceColor == DriverStation.Alliance.Blue) {
+			rioDuinoLEDMode = "autoBlue";
+			rioDuino.SendString(rioDuinoLEDMode);
+		} else {
+			rioDuinoLEDMode = "autoRed";
+			rioDuino.SendString(rioDuinoLEDMode);
+		}	
 		
-//		allianceColor = DriverStation.getInstance().getAlliance();
-//		if (allianceColor == DriverStation.Alliance.Blue) {
-//			rioDuinoLEDMode = "autoBlue";
-//			rioDuino.SendString(rioDuinoLEDMode);
-//		} else {
-//			rioDuinoLEDMode = "autoRed";
-//			rioDuino.SendString(rioDuinoLEDMode);
-//		}	
-		
-		new AutonomousCommand(StartingPosition.POSITION_2).start();
-		new Compressor(0).start();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
+    	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+
 		Scheduler.getInstance().run();
 	}
 
 	@Override
-	public void disabledInit() {		
+	public void disabledInit() {	
+		Robot.driveSubsystem.endAdjustment();
+		
 		if(shooterSubsystem.leftAgitatorServo != null && shooterSubsystem.rightAgitatorServo != null) {
 			shooterSubsystem.stopAgitators();
 		}
@@ -101,8 +107,8 @@ public class Robot extends IterativeRobot {
 		if(rioDuino != null)
 			rioDuino.SendString("red");
 		
-//		if(gyro != null) 
-//			gyro.reset();
+		if(gyro != null) 
+			gyro.reset();
 	}
 
 	@Override
