@@ -9,21 +9,21 @@ public class PortMap {
 	
 	//****************DRIVE*******************//
 	
-	public static final int DRIVE_FRONT_LEFT_TALON = 7;
-	public static final int DRIVE_FRONT_RIGHT_TALON = 5;
-	public static final int DRIVE_BACK_RIGHT_TALON = 2;
-	public static final int DRIVE_BACK_LEFT_TALON = 6;
+	public static final int DRIVE_FRONT_LEFT_TALON = 3;
+	public static final int DRIVE_FRONT_RIGHT_TALON = 2;
+	public static final int DRIVE_BACK_RIGHT_TALON = 4;
+	public static final int DRIVE_BACK_LEFT_TALON = 1;
 	
-	public static final int[] DRIVE_RIGHT_PISTONS = {2,5};
-	public static final int[] DRIVE_LEFT_PISTONS = {0,7};
+	public static final int[] DRIVE_RIGHT_PISTONS = {2, 0};
+	public static final int[] DRIVE_LEFT_PISTONS = {1, 3};
 		
 	//****************GEAR*******************//
 	
-	public static final int[] GEAR_PISTONS = {4,6};
+	public static final int[] GEAR_PISTONS = {4,5};
 
 	//****************SHOOT*******************//
 
-	public static final int RIGHT_SHOOT_TALON = 1;
+	public static final int RIGHT_SHOOT_TALON = 6;
 	public static final int LEFT_SHOOT_TALON = 0;
 	
 	public static final int LEFT_SHOOT_SERVO = 2; //2
@@ -34,6 +34,6 @@ public class PortMap {
 	
 	//****************CLIMBER*******************//
 
-	public static final int LEFT_CLIMBER_TALON = 3;
-	public static final int RIGHT_CLIMBER_TALON = 4;
+	public static final int LEFT_CLIMBER_TALON = 6;
+	public static final int RIGHT_CLIMBER_TALON = 5;
 }

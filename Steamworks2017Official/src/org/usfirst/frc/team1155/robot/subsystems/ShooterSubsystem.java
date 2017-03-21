@@ -42,7 +42,7 @@ public class ShooterSubsystem extends Subsystem {
 		
 		//****************RIGHT SIDE*******************//
 		
-		rightShootTalon = new CANTalon(PortMap.RIGHT_SHOOT_SERVO);
+		rightShootTalon = new CANTalon(PortMap.RIGHT_SHOOT_TALON);
 		rightShootTalon.set(0);
 		
 		rightShootServo = new Servo(PortMap.RIGHT_SHOOT_SERVO);
@@ -51,7 +51,7 @@ public class ShooterSubsystem extends Subsystem {
 		
 		setServoPosition(ServoPosition.POSITION_1);
 		stopAgitators();
-		
+		System.out.println("started");
 	}
 	
 	public void setCorrectServoPosition() {
@@ -75,8 +75,9 @@ public class ShooterSubsystem extends Subsystem {
 	
 	public void setRightShooter(double shootSpeed, int agitateSpeed) {
 		//rightShootTalon.set(shootSpeed);
-		rightShootTalon.set(OI.rightJoystick.getThrottle());
-		
+		//rightShootTalon.set(OI.rightJoystick.getThrottle());
+		rightShootTalon.set(0.5);
+		//System.out.println();
 		int convertedToRawSpeed = getRawSpeed(agitateSpeed);
 		rightAgitatorServo.setRaw(300);
 	}

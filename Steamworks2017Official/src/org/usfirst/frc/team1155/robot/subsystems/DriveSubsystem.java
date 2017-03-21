@@ -91,7 +91,7 @@ public class DriveSubsystem extends PIDSubsystem {
 		if(angleDrive) {
 			return;
 		}
-		xVal = xVal;
+		xVal = -xVal;
 		// yVal = -yVal;
 		rotationalVal = -rotationalVal;
 
@@ -136,6 +136,14 @@ public class DriveSubsystem extends PIDSubsystem {
 	}
 
 	public void engageWheels(DoubleSolenoid.Value value) {
+//		if (value == Value.kForward){
+//			frontPivots.set(Value.kForward);
+//			backPivots.set(Value.kReverse);
+//		}
+//		else{
+//			frontPivots.set(Value.kReverse);
+//			backPivots.set(Value.kForward);
+//		}
 		frontPivots.set(value);
 		backPivots.set(value);
 		SmartDashboard.putString("Wheels", value.name());

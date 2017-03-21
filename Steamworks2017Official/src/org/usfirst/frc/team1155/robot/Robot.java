@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	public static RioDuinoController rioDuino;
 	public static DriverStation.Alliance allianceColor;
 	String rioDuinoLEDMode;
-	
+	public static Compressor compressor;
 
 	@Override
 	public void robotInit() {
@@ -60,7 +60,7 @@ public class Robot extends IterativeRobot {
 		rioDuino.SendString("green");
 
 		new TankDriveCommand().start(); 
-	//	new Compressor(0).start();
+		compressor = new Compressor(0);
 	}
 
 	@Override
@@ -72,6 +72,13 @@ public class Robot extends IterativeRobot {
     	Robot.shooterSubsystem.rightShootServo.set(1+OI.leftJoystick.getThrottle());
     	
 		Scheduler.getInstance().run();
+		
+		if (OI.leftJoystick.getRawButton(1)){
+			compressor.start();
+		}
+		else if (OI.rightJoystick.getRawButton(1)){
+			compressor.stop();
+		}
 	}
 	
 	@Override

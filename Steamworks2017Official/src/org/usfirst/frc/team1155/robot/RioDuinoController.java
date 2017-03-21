@@ -28,14 +28,52 @@ public class RioDuinoController {
 	
 	public void SendString(String writeStr)
 	{
-		char[] CharArray = writeStr.toCharArray(); 
-		//you can't use strings as they are too big too pass through, so convert into chars
-		byte[] WriteData = new byte[CharArray.length]; 
-		//you can't use chars as they are too big too pass through, so convert into bytes
-		for (int i = 0; i < CharArray.length; i++) {
-			WriteData[i] = (byte) CharArray[i];
-		} //convert chars into bytes
-		i2cBus.transaction(WriteData, WriteData.length, null, 0);
+		byte[] toSend = new byte[1];
+		switch(writeStr){
+		case ("autoBlue"):
+			toSend[0] = 0;
+			break;
+		case ("autoRed"):
+			toSend[0] = 1;
+			break;
+		case ("tankRed"):
+			toSend[0] = 3;
+			break;
+		case ("mechBlue"):
+			toSend[0] = 4;
+			break;
+		case ("mechRed"):
+			toSend[0] = 5;
+			break;
+		case ("disableInit"):
+			toSend[0] = 6;
+			break;
+		case ("depositingGear"):
+			toSend[0] = 7;
+			break;
+		case ("shooting"):
+			toSend[0] = 8;
+			break;
+		case ("climbing"):
+			toSend[0] = 9;
+			break;
+		case ("red"):
+			toSend[0] = 10;
+			break;
+		case ("yellow"):
+			toSend[0] = 11;
+			break;
+		case ("green"):
+			toSend[0] = 12;
+			break;
+		case ("blue"):
+			toSend[0] = 13;
+			break;
+		case ("purple"):
+			toSend[0] = 14;
+			break;
+		}
+		//i2cBus.transaction(toSend, toSend.length, null, 0);
 		//sends it to RioDuino
 	}
 }

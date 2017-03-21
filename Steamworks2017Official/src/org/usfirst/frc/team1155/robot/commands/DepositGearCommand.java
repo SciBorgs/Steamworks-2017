@@ -19,7 +19,7 @@ public class DepositGearCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.gearSubsystem.enableUltrasonic();
-    	Robot.gearSubsystem.setGearPosition(GearPosition.OPEN);
+    	Robot.gearSubsystem.setGearPosition(GearPosition.CLOSE);// open
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -26,8 +26,10 @@ public class AutonomousCommand extends CommandGroup {
 		Robot.driveSubsystem.setDriveMode(DriveMode.MECHANUM);
 		switch (pos) {
 		case POSITION_LEFT:
-			addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
-			addSequential(new GyroTurnCommand(60));
+			addSequential(new DistanceDriveCommand(57));//DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
+			addSequential(new DepositGearCommand());
+			addSequential(new DistanceDriveCommand(-57));
+			//addSequential(new GyroTurnCommand(60));
 //			addSequential(new VisionAlignCommand());
 //			addSequential(new DepositGearCommand());
 			break;
@@ -38,6 +40,7 @@ public class AutonomousCommand extends CommandGroup {
 			addSequential(new DepositGearCommand());
 			break;
 		case POSITION_MIDDLE:
+			//57
 			addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE));
 			addSequential(new VisionAlignCommand());
 			addSequential(new DepositGearCommand());

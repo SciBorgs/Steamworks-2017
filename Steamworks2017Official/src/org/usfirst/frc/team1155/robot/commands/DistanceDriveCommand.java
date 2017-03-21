@@ -28,6 +28,7 @@ public class DistanceDriveCommand extends Command {
     	
 		Robot.driveSubsystem.startAdjustment(Robot.driveSubsystem.getEncDistance(), distanceToDrive);
 		Robot.driveSubsystem.getPIDController().setPID(SmartDashboard.getNumber("P", 0.1), SmartDashboard.getNumber("I", 0), SmartDashboard.getNumber("D", 0.1));
+		Robot.driveSubsystem.getPIDController().setAbsoluteTolerance(2);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,7 +38,9 @@ public class DistanceDriveCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(Robot.driveSubsystem.getPIDController().getError()) < 3;
+    	System.out.println(Robot.driveSubsystem.getEncDistance());
+    	return Robot.driveSubsystem.getPIDController().onTarget();
+    	//return Math.abs(Robot.driveSubsystem.getPIDController().getError()) < 3;
     }
 
     // Called once after isFinished returns true

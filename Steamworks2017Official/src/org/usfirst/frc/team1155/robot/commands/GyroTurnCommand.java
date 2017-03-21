@@ -30,22 +30,23 @@ public class GyroTurnCommand extends Command {
     	Robot.driveSubsystem.startAdjustment(initialAngle, initialAngle + degreesToTurn);
 		// Sets PID of the PID controller to the values given on the SmartDashboard
 		Robot.driveSubsystem.getPIDController().setPID(SmartDashboard.getNumber("P"), SmartDashboard.getNumber("I"), SmartDashboard.getNumber("D"));
-    	
+    	System.out.println(SmartDashboard.getNumber("P"));
+    	Robot.driveSubsystem.getPIDController().setAbsoluteTolerance(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//System.out.println(Robot.driveSubsystem.getPIDController().getAvgError());
-    	double avg = Robot.driveSubsystem.getPIDController().getError();
-    	
-    	
-		return Math.abs(avg) < 1;// && sketch;//(Robot.driveSubsystem.getPIDController().getAvgError() < 0);
+    	double avg = Robot.driveSubsystem.getPIDController().getAvgError();
+    	if (avg != 0) sketch = true;
+    	//Robot.driveSubsystem.getPIDController().get
+    	System.out.println(avg);
+		return Robot.driveSubsystem.getPIDController().onTarget();//Math.abs(avg) < 0.5 && sketch;//(Robot.driveSubsystem.getPIDController().getAvgError() < 0);
     }
 
     // Called once after isFi nished returns true
