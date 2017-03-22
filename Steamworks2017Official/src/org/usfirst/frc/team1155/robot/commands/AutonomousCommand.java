@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1155.robot.commands;
 
 import org.usfirst.frc.team1155.robot.Robot;
+import org.usfirst.frc.team1155.robot.commands.ShootCommand.ShooterSide;
 import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem.DriveMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -26,9 +27,14 @@ public class AutonomousCommand extends CommandGroup {
 		Robot.driveSubsystem.setDriveMode(DriveMode.MECHANUM);
 		switch (pos) {
 		case POSITION_LEFT:
-			addSequential(new DistanceDriveCommand(57));//DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
-			addSequential(new DepositGearCommand());
-			addSequential(new DistanceDriveCommand(-57));
+			//addSequential(new DistanceDriveCommand(57));//DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
+			//addSequential(new DepositGearCommand());
+			//addSequential(new DistanceDriveCommand(-57));
+			//addSequential(new DistanceDriveCommand(61));
+			//addSequential(new GyroTurnCommand(-90));
+			//addSequential(new DistanceDriveCommand(20));
+			addSequential(new ShootCommand(ShooterSide.RIGHT));
+			//addSequential(new DistanceDriveCommand(57));
 			//addSequential(new GyroTurnCommand(60));
 //			addSequential(new VisionAlignCommand());
 //			addSequential(new DepositGearCommand());

@@ -76,7 +76,9 @@ public class ShooterSubsystem extends Subsystem {
 	public void setRightShooter(double shootSpeed, int agitateSpeed) {
 		//rightShootTalon.set(shootSpeed);
 		//rightShootTalon.set(OI.rightJoystick.getThrottle());
-		rightShootTalon.set(0.5);
+		System.out.println("Strated");
+		rightShootTalon.set(0.52);
+		System.out.println(rightShootServo.get());
 		//System.out.println();
 		int convertedToRawSpeed = getRawSpeed(agitateSpeed);
 		rightAgitatorServo.setRaw(300);
