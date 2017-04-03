@@ -37,11 +37,11 @@ public class ShootCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(shooterSide == ShooterSide.LEFT) {
-        	Robot.shooterSubsystem.setLeftShooter(0.8, -1);
-        }else if(shooterSide == ShooterSide.RIGHT) {
-        	Robot.shooterSubsystem.setRightShooter(0.8, 1);
-        }
+//    	if(shooterSide == ShooterSide.LEFT) {
+//        	Robot.shooterSubsystem.setLeftShooter(0.8, -1);
+//        }else if(shooterSide == ShooterSide.RIGHT) {
+//        	Robot.shooterSubsystem.setRightShooter(0.8, 1);
+//        }
     }
 
     // Make this return true when this Command no longer needs to run execute()

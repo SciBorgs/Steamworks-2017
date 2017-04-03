@@ -66,21 +66,16 @@ public class ShooterSubsystem extends Subsystem {
 	}
 
 	public void setLeftShooter(double shootSpeed, int agitateSpeed) {
-		//leftShootTalon.set(-shootSpeed);
-		leftShootTalon.set(OI.rightJoystick.getThrottle());
+		leftShootTalon.set(-0.53);
 		
-		int convertedToRawSpeed = getRawSpeed(agitateSpeed);
+		//int convertedToRawSpeed = getRawSpeed(agitateSpeed);
 		leftAgitatorServo.setRaw(1700);
 	}
 	
 	public void setRightShooter(double shootSpeed, int agitateSpeed) {
-		//rightShootTalon.set(shootSpeed);
-		//rightShootTalon.set(OI.rightJoystick.getThrottle());
-		System.out.println("Strated");
-		rightShootTalon.set(0.52);
-		System.out.println(rightShootServo.get());
-		//System.out.println();
-		int convertedToRawSpeed = getRawSpeed(agitateSpeed);
+		rightShootTalon.set(0.53);
+		//System.out.println(rightShootServo.get());
+		//int convertedToRawSpeed = getRawSpeed(agitateSpeed);
 		rightAgitatorServo.setRaw(300);
 	}
 	

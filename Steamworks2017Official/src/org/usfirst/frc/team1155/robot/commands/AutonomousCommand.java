@@ -15,42 +15,57 @@ public class AutonomousCommand extends CommandGroup {
 	// private boolean shootBalls = false;
 	private final double DISTANCE_TO_BASELINE = 93.25; // inches
 	private final double DISTANCE_TO_PIVOT = 20.35; // inches
-
-	public enum StartingPosition {
-		POSITION_LEFT, // left driver station
-		POSITION_MIDDLE, // middle driver station
-		POSITION_RIGHT; // right driver station
+	private final double ROBOT_LENGTH = 36;
+	private final double ROBOT_WIDTH = 0;
+	
+	public enum AutoRoutine {
+		GEAR_LEFT, // left driver station
+		GEAR_MIDDLE, // middle driver station
+		GEAR_RIGHT,
+		SHOOT_RED,
+		SHOOT_BLUE,
+		NOTHING, 
+		BASELINE; // right driver station
 	}
 
 	// possible order of auto commands
-	public AutonomousCommand(StartingPosition pos) {
-		Robot.driveSubsystem.setDriveMode(DriveMode.MECHANUM);
+	public AutonomousCommand(AutoRoutine pos) {
+		Robot.driveSubsystem.setDriveMode(DriveMode.TANK);
 		switch (pos) {
-		case POSITION_LEFT:
-			//addSequential(new DistanceDriveCommand(57));//DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
-			//addSequential(new DepositGearCommand());
-			//addSequential(new DistanceDriveCommand(-57));
-			//addSequential(new DistanceDriveCommand(61));
-			//addSequential(new GyroTurnCommand(-90));
-			//addSequential(new DistanceDriveCommand(20));
-			addSequential(new ShootCommand(ShooterSide.RIGHT));
-			//addSequential(new DistanceDriveCommand(57));
-			//addSequential(new GyroTurnCommand(60));
-//			addSequential(new VisionAlignCommand());
-//			addSequential(new DepositGearCommand());
+		case GEAR_LEFT:
+			//System.out.println("gear left");
+			addSequential(new DistanceDriveCommand(96 - ROBOT_LENGTH/2));
+			addSequential(new GyroTurnCommand(60));
+			addSequential(new DistanceDriveCommand(62 - ROBOT_LENGTH/3));
 			break;
-		case POSITION_RIGHT:
-			addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
+		case GEAR_RIGHT:
+			addSequential(new DistanceDriveCommand(96 - ROBOT_LENGTH/2));
 			addSequential(new GyroTurnCommand(-60));
-			addSequential(new VisionAlignCommand());
-			addSequential(new DepositGearCommand());
+			addSequential(new DistanceDriveCommand(62 - ROBOT_LENGTH/3));
+			//addSequential(new DepositGearCommand());
 			break;
-		case POSITION_MIDDLE:
-			//57
+		case GEAR_MIDDLE:
+			addSequential(new DistanceDriveCommand(110 - ROBOT_LENGTH));//DISTANCE_TO_BASELINE + DISTANCE_TO_PIVOT));
+			//addSequential(new DepositGearCommand());
+			//addSequential(new DistanceDriveCommand(-50));
+			break;
+		case SHOOT_RED:
+//			addSequential(new ShootCommand(ShooterSide.LEFT));
+			
+			addSequential(new DistanceDriveCommand(-59 + ROBOT_LENGTH/2));
+			addSequential(new GyroTurnCommand(-45));
+			addSequential(new AutoShootCommand());
+			
+			break;
+		case SHOOT_BLUE:
+			addSequential(new DistanceDriveCommand(-59 + ROBOT_LENGTH/2));
+			addSequential(new GyroTurnCommand(45));
+			addSequential(new AutoShootCommand());
+																																																																																																																																																																																addSequential(new AutoShootCommand());
+			break;
+		case BASELINE:
 			addSequential(new DistanceDriveCommand(DISTANCE_TO_BASELINE));
-			addSequential(new VisionAlignCommand());
-			addSequential(new DepositGearCommand());
-			break;
+			
 		default:
 			break;
 		}

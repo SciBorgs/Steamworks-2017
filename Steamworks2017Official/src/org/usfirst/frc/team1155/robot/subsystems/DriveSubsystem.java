@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -35,8 +36,10 @@ public class DriveSubsystem extends PIDSubsystem {
 	
 	public SensorMode sensorMode;
 
+	public Ultrasonic ultrasonic;
+	
 	public DriveSubsystem() {
-		super("Drive", 0.1, 0, 0.1);
+		super("Drive", 1.0, 0.1, 0.1);
 
 		frontLeftMotor = new CANTalon(PortMap.DRIVE_FRONT_LEFT_TALON);
 		frontRightMotor = new CANTalon(PortMap.DRIVE_FRONT_RIGHT_TALON);
@@ -47,6 +50,10 @@ public class DriveSubsystem extends PIDSubsystem {
 		backPivots = new DoubleSolenoid(PortMap.DRIVE_LEFT_PISTONS[0], PortMap.DRIVE_LEFT_PISTONS[1]);
 		
 		driveMode = DriveMode.TANK;
+		
+		//ultrasonic = new Ultrasonic(PortMap.ULTRASONIC[0], PortMap.ULTRASONIC[1]);
+		//ultrasonic.setEnabled(true);
+		
 		
     	resetEncoders();
 
@@ -66,7 +73,7 @@ public class DriveSubsystem extends PIDSubsystem {
 			break;
 		case MECHANUM:
 			double yVal = -lateralJoy.getY();
-			double xVal = lateralJoy.getX();
+			double xVal = -lateralJoy.getX();
 			double rotationalVal = rotationalJoy.getX();
 			setMechSpeed(xVal, yVal, rotationalVal);
 			break;
@@ -155,7 +162,7 @@ public class DriveSubsystem extends PIDSubsystem {
     }
     
     public double getEncDistance(){
-    	return frontRightMotor.getEncPosition() * (1/44.2);
+    	return -frontLeftMotor.getEncPosition() * (1/44.2);
     }
 
 	@Override
@@ -205,5 +212,9 @@ public class DriveSubsystem extends PIDSubsystem {
 		}
 
 	}
+	
+//	public double getUltrasonic() {
+//		return ultrasonic.getRangeInches();
+//	}
 
 }

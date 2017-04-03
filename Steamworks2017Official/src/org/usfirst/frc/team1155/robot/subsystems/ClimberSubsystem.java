@@ -20,7 +20,7 @@ public class ClimberSubsystem extends Subsystem {
     
     public void startClimb() {
     	leftClimber.set(1);
-    	rightClimber.set(-1); //change one to negative
+    	rightClimber.set(1); //change one to negative
     }
     
     public void stopClimbing() {

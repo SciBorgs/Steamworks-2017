@@ -1,25 +1,23 @@
 
 package org.usfirst.frc.team1155.robot;
 
+import org.usfirst.frc.team1155.robot.commands.AutonomousCommand;
+import org.usfirst.frc.team1155.robot.commands.AutonomousCommand.AutoRoutine;
+import org.usfirst.frc.team1155.robot.commands.TankDriveCommand;
+import org.usfirst.frc.team1155.robot.subsystems.ClimberSubsystem;
+import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team1155.robot.subsystems.GearSubsystem;
+import org.usfirst.frc.team1155.robot.subsystems.ImageSubsystem;
+import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team1155.robot.commands.AutonomousCommand;
-import org.usfirst.frc.team1155.robot.commands.TankDriveCommand;
-import org.usfirst.frc.team1155.robot.commands.AutonomousCommand.StartingPosition;
-import org.usfirst.frc.team1155.robot.commands.DistanceDriveCommand;
-import org.usfirst.frc.team1155.robot.commands.GyroTurnCommand;
-import org.usfirst.frc.team1155.robot.subsystems.ClimberSubsystem;
-import org.usfirst.frc.team1155.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team1155.robot.subsystems.GearSubsystem;
-import org.usfirst.frc.team1155.robot.subsystems.ShooterSubsystem;
 
 public class Robot extends IterativeRobot {
 
@@ -27,16 +25,21 @@ public class Robot extends IterativeRobot {
 	public static ShooterSubsystem shooterSubsystem;
 	public static GearSubsystem gearSubsystem;
 	public static ClimberSubsystem climberSubsystem;
+//	public static ImageSubsystem imageSubsystem;
 	
 	public static OI oi;
 	
 	public static ADXRS450_Gyro gyro;
+	
+	public static AutoRoutine autoRoutine;
 	
 	public static RioDuinoController rioDuino;
 	public static DriverStation.Alliance allianceColor;
 	String rioDuinoLEDMode;
 	public static Compressor compressor;
 
+	public static boolean isInTeleop;
+	
 	@Override
 	public void robotInit() {
     	gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
@@ -45,60 +48,92 @@ public class Robot extends IterativeRobot {
 		gearSubsystem = new GearSubsystem();
 		shooterSubsystem = new ShooterSubsystem();
 		climberSubsystem = new ClimberSubsystem();
-
+//		imageSubsystem = new ImageSubsystem();
+		
+		compressor = new Compressor(0);
+		
 		oi = new OI();
 		
 		rioDuino = new RioDuinoController();
+		
+		isInTeleop = false;
+		
+		//SmartDashboard.putString("Auto Routine: ", "ACTION POSITION");
 	}
 	
 	@Override
 	public void teleopInit() {
-		gyro.reset();
+		//gyro.reset();
 		driveSubsystem.resetEncoders();
 		driveSubsystem.endAdjustment();
 		
-		rioDuino.SendString("green");
+		isInTeleop = true;
+		
+		//rioDuino.SendString("green");
 
 		new TankDriveCommand().start(); 
-		compressor = new Compressor(0);
+//		compressor = new Compressor(0);
 	}
 
 	@Override
 	public void teleopPeriodic() {
-    	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+    	Scheduler.getInstance().run();
 
+    	//SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+    	//SmartDashboard.putNumber("Ultrasonic Distance", Robot.driveSubsystem.getUltrasonic());
+    	//SmartDashboard.putString("Ultrasonic Valid", "" + Robot.driveSubsystem.ultrasonic.isRangeValid());
+    	//System.out.println(Robot.driveSubsystem.getEncDistance());
+    	  
     	//testing servos
     	Robot.shooterSubsystem.leftShootServo.set(-OI.leftJoystick.getThrottle());
     	Robot.shooterSubsystem.rightShootServo.set(1+OI.leftJoystick.getThrottle());
-    	
-		Scheduler.getInstance().run();
+    	//System.out.println(Robot.shooterSubsystem.leftShootServo.get());
 		
-		if (OI.leftJoystick.getRawButton(1)){
-			compressor.start();
-		}
-		else if (OI.rightJoystick.getRawButton(1)){
+		if (OI.leftJoystick.getRawButton(1) || OI.rightJoystick.getRawButton(1)){
 			compressor.stop();
 		}
+		else if(!compressor.enabled()){
+			compressor.start();
+		}
+		
+		SmartDashboard.putBoolean("Compressor on: ", compressor.enabled());
 	}
 	
 	@Override
 	public void autonomousInit() {
-		new AutonomousCommand(StartingPosition.POSITION_LEFT).start();
+		isInTeleop = false;
 		
-		allianceColor = DriverStation.getInstance().getAlliance();
-		if (allianceColor == DriverStation.Alliance.Blue) {
-			rioDuinoLEDMode = "autoBlue";
-			rioDuino.SendString(rioDuinoLEDMode);
-		} else {
-			rioDuinoLEDMode = "autoRed";
-			rioDuino.SendString(rioDuinoLEDMode);
-		}	
+		switch(SmartDashboard.getString("Auto Routine: ").toLowerCase()){
+		case "gear left":
+			autoRoutine = AutoRoutine.GEAR_LEFT;
+			break;
+		case "gear right":
+			autoRoutine = AutoRoutine.GEAR_RIGHT;
+			break;
+		case "gear middle":
+			autoRoutine = AutoRoutine.GEAR_MIDDLE;
+			break;
+		case "shoot red":
+			autoRoutine = AutoRoutine.SHOOT_RED;
+			break;
+		case "shoot blue":
+			autoRoutine = AutoRoutine.SHOOT_BLUE;
+			break;
+		default:
+			autoRoutine = AutoRoutine.NOTHING;
+			break;
+		}
+		
+		//compressor.start();
+		autoRoutine = AutoRoutine.GEAR_MIDDLE;
+		//System.out.println(autoRoutine.name());
+		new AutonomousCommand(autoRoutine).start();	
 		
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-    	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+    	//SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
 
 		Scheduler.getInstance().run();
 	}
@@ -111,12 +146,11 @@ public class Robot extends IterativeRobot {
 			shooterSubsystem.stopAgitators();
 		}
 		
-		if(rioDuino != null)
-			rioDuino.SendString("disableInit");
+//		if(rioDuino != null)
+//			rioDuino.SendString("disableInit");
 		
-		if(gyro != null)
-			//Roman was here
-			gyro.reset();
+//		if(gyro != null)
+//			gyro.reset();
 	}
 
 	@Override
@@ -125,7 +159,14 @@ public class Robot extends IterativeRobot {
 	}
 
 	@Override
+	public void testInit() {
+		compressor = new Compressor(0);
+		compressor.start();
+	}
+	
+	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+
 	}
 }

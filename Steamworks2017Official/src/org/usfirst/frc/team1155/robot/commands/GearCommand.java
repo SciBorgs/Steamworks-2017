@@ -7,6 +7,7 @@ import org.usfirst.frc.team1155.robot.subsystems.GearSubsystem.GearPosition;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,8 +23,8 @@ public class GearCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {    	
     	Robot.gearSubsystem.setGearPosition(gearPosition);
-    	
- 		Robot.rioDuino.SendString("depositingGear");
+    	SmartDashboard.putString("Gear Position", gearPosition.name());
+ 		//Robot.rioDuino.SendString("depositingGear");
     }
 
     // Called repeatedly when this Command is scheduled to run

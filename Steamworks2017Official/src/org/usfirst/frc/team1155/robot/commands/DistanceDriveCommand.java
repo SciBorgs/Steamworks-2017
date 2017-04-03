@@ -39,7 +39,8 @@ public class DistanceDriveCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	System.out.println(Robot.driveSubsystem.getEncDistance());
-    	return Robot.driveSubsystem.getPIDController().onTarget();
+    	return Robot.driveSubsystem.getPIDController().onTarget();// || Robot.driveSubsystem.getRightUltrasonic() < 2;
+    	
     	//return Math.abs(Robot.driveSubsystem.getPIDController().getError()) < 3;
     }
 
